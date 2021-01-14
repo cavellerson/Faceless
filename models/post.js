@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema ({
-    username: {type: String},
-    title: {type: String},
-    body: {type: String},
+    username: {type: String, required: true},
+    title: {type: String, required: true},
+    body: {type: String, required: true},
     imgsrc: {type: String},
     votes: {type: Number, default: 0},
-    date: {type: Date}
+    date: {type: Date, required: true}
 })
 
 
