@@ -15,8 +15,8 @@ app.use(express.json())
 app.use(express.static('public'))
 
 // Controllers
-// const Controller = require('./controllers/animals_controller.js')
-// app.use('/controller', Controller)
+const postsController = require('./controllers/posts_controller.js')
+app.use('/posts', postsController)
 
 
 //Database Connection
