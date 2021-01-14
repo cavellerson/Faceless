@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema ({
     title: {type: String},
     body: {type: String},
     imgsrc: {type: String},
-    votes: {type: Number, default: 0}
+    votes: {type: Number, default: 0},
     date: {type: Date}
 })
 
