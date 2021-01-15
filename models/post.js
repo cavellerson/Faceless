@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema ({
     body: {type: String, required: true},
     imgsrc: {type: String},
     votes: {type: Number, default: 0},
-    date: {type: Date, required: true}
+    date: {type: Date, default: () => {return Date.now()}}
 })
 
 
