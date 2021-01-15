@@ -26,27 +26,16 @@ class App extends React.Component {
     state= {
         randomAdjective: "",
         randomPokemon: "",
+        randomUsername: ""
     }
 
-    // rngUsername = () => {
-    //     this.setState({
-    //         randomAdjective: randomAdjective(adjectives),
-    //         randomPokemon: randomPokemon,
-    //         randomUsername: `${randomAdjective} ${randomPokemon}`
-    //     })
-    //
-    //     return this.
-    //
-    // }
-
-
-    showAdjective = () => {
-        //testing if random name works on click
+    rngUsername = () => {
         randomPokemon();
 
         this.setState({
             randomAdjective: randomAdjective(adjectives),
             randomPokemon: pokemon,
+            randomUsername: `${randomAdjective(adjectives)} ${pokemon}`
         })
     }
 
@@ -54,8 +43,8 @@ class App extends React.Component {
         return(
             <div>
             <h2>One and Done</h2>
-            <button onClick={this.showAdjective}>random name: </button>
-            {this.state.randomAdjective} {this.state.randomPokemon}
+            <button onClick={this.rngUsername}>random name: </button>
+            {this.state.randomUsername}
             </div>
         )
     }
