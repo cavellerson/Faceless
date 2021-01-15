@@ -24,9 +24,9 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors());
-// app.use(fileupload({
-//   useTempFiles : true,
-// }))
+app.use(fileupload({
+  useTempFiles : true,
+}))
 
 // Controllers
 const postsController = require('./controllers/posts_controller.js')
