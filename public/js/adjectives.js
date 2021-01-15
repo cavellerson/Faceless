@@ -454,4 +454,5 @@ const adjectives = [
     
     "zealous" ]
 
-    console.log(adjectives.length)
+    export { adjectives }
+
