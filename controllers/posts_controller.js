@@ -46,6 +46,7 @@ posts.put('/:id', (req, res) => {
     )
 })
 
+//Delete
 posts.delete('/:id', (req, res) => {
     Post.findByIdAndRemove(req.params.id, (err, data)=>{
         Post.find({}, (err, data)=>{
