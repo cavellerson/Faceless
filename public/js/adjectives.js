@@ -454,5 +454,3 @@ const adjectives = [
     
     "zealous" ]
 
-    export { adjectives }
-
