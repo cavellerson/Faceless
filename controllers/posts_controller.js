@@ -1,6 +1,9 @@
+//Dependencies
 const express = require('express');
 const posts = express.Router()
+const cloudinary = require('cloudinary').v2;
 
+//Post Collection
 const Post = require("../models/post.js");
 
 
@@ -15,16 +18,37 @@ posts.get('/', (req, res) => {
     })
 })
 
+// //Create
+// posts.post('/', (req, res) => {
+//     Post.create(req.body, (err, data) => {
+//         Post.find({}, (err, data) => {
+//             if (err) {
+//                 console.log(err)
+//             } else {
+//                 res.json(data)
+//             }
+//         })
+//     })
+// })
+
 //Create
 posts.post('/', (req, res) => {
-    Post.create(req.body, (err, data) => {
-        Post.find({}, (err, data) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.json(data)
-            }
-        })
+    console.log(req.body, "req")
+    const img = req.body.file
+    cloudinary.uploader.upload(img, (err, data) => {
+        if (err) {
+            console.log(err, "THIS")
+        } else {
+            console.log(data)
+            req.body.imgsrc = data.url
+            Post.create(req.body, (err, data) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.json(data)
+                }
+            })
+        }
     })
 })
 

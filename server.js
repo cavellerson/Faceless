@@ -1,18 +1,32 @@
 //Dependencies
-const express = require('express')
-const dotenv = require('dotenv')
-const mongoose = require('mongoose')
+const express = require('express');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const cloudinary = require('cloudinary').v2;
+const cors = require('cors');
+// const fileupload = require('express-fileupload');
+
 
 
 // Config
-const app = express()
 dotenv.config()
+const app = express()
 const PORT = process.env.PORT
 const MONGODB_URI = process.env.MONGODB_URI
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+})
 
 // Middleware
-app.use(express.json())
 app.use(express.static('public'))
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+app.use(cors());
+// app.use(fileupload({
+//   useTempFiles : true,
+// }))
 
 // Controllers
 const postsController = require('./controllers/posts_controller.js')
