@@ -18,6 +18,7 @@ let randomPokemon = () => {
 
 let pokemon = randomPokemon();
 
+
 //successfully logs a random adjective each time function is invoked
 // console.log(randomAdjective(adjectives)
 // );
@@ -26,7 +27,9 @@ class App extends React.Component {
     state= {
         file: null,
         username: "",
-        posts: []
+        body: "",
+        posts: [],
+        votes: 0
     }
 
     rngUsername = () => {
@@ -46,12 +49,12 @@ class App extends React.Component {
         const preview = document.querySelector('#preview');
         const file = document.querySelector('input[type=file]').files[0];
         const reader = new FileReader();
-      
+
         reader.addEventListener("load", function () {
           // convert image file to base64 string
           preview.src = reader.result;
         }, false);
-      
+
         if (file) {
           reader.readAsDataURL(file);
         }
@@ -64,13 +67,45 @@ class App extends React.Component {
         console.log(event.target.files[0])
         this.previewFile()
     }
-
     cancelImage = (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         document.getElementById('imgsrc').value = ''
         document.getElementById('preview').src = ''
-    }  
-    
+    }
+
+    componentDidMount = () => {
+        axios.get('/posts').then((response) => {
+            this.setState({
+                posts: response.data
+            })
+        })
+    }
+
+    upvote = (event) => {
+        this.setState({
+            votes: this.state.votes + 1
+        })
+        axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
+            console.log(`${response.data.votes} has been UPVOTED`);
+        })
+    }
+
+
+    downvote = (event) => {
+        this.setState({
+            votes: this.state.votes - 1
+        })
+
+        axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
+            console.log(`${response.data} has been DOWNVOTED`);
+            if (this.state.votes === -3) {
+                axios.delete(`/posts/${event.target.value}`).then((response) => {
+                    console.log(`${response.data.votes} has been deleted`);
+                })
+            }
+        })
+    }
+
     create = (event) => {
         event.preventDefault();
         console.log(this.state.file)
@@ -96,6 +131,27 @@ class App extends React.Component {
                 }
             )
     }
+        hideForm = () => {
+            document.querySelector('#createPostContainer').style.display = 'none'
+        }
+
+
+
+
+        showPosts = () => {
+            this.hideForm();
+            document.querySelector('.posts').style.display = 'block'
+
+        }
+
+
+        componentDidMount = () => {
+            axios.get('/posts').then((response) => {
+                this.setState({
+                    posts: response.data
+                })
+            })
+        }
 
 
     render = ()=>{
@@ -105,27 +161,27 @@ class App extends React.Component {
                 <div id="createPostContainer">
                     <form
                     encType="multipart/form-data"
-                    onFocus={this.rngUsername} 
+                    onFocus={this.rngUsername}
                     onSubmit={this.create}>
 
                         <input type="hidden" name="username" value={this.state.username}/>
 
                         {/* <label htmlFor="title">Title: </label><br/>
-                        <input 
-                            type="text" 
-                            name="title" 
-                            id="title" 
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
                             onChange={this.handleChange}/><br/> */}
 
-                        <textarea 
-                            name="body" 
+                        <textarea
+                            name="body"
                             id="body" cols="30" rows="10" placeholder="whats on your mind..."
                             onChange={this.handleChange}>
                         </textarea><br/>
-                        
+
                         <label htmlFor="imgsrc">Select Image:</label><br/>
-                        <input 
-                            type="file" 
+                        <input
+                            type="file"
                             name="imgsrc"
                             id="imgsrc"
                             onChange={this.handleFile}
@@ -136,16 +192,41 @@ class App extends React.Component {
                         <input
                             type="submit"
                             name="submit"
-                            value="Create Post" />    
+                            value="Create Post"
+                            onClick={this.showPosts} />
                     </form>
                     <img id="preview" src="" alt=""/>
                 </div>
+
+                <ul>
+                <div className="posts">
+                    {this.state.posts.map((post,index) => {
+                        return (
+                            <li key={index}>
+                            {post.username}
+                            <br/>
+                            {post.body}
+                            <br/>
+                            <img src={post.imgsrc}/>
+                            <br/>
+                            <button value={post._id} onClick={this.upvote}>↑ {this.state.votes}</button>
+                            <button value={post._id} onClick={this.downvote}>↓ {this.state.votes}</button>
+                            </li>
+                        )
+                    })}
+                </div>
+                </ul>
+
             </div>
         )
     }
 }
 
+
+
 ReactDOM.render(
     <App></App>,
     document.querySelector('#root')
 )
+
+document.querySelector('.posts').style.display = 'none'
