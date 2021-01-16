@@ -18,23 +18,10 @@ posts.get('/', (req, res) => {
     })
 })
 
-// //Create
-// posts.post('/', (req, res) => {
-//     Post.create(req.body, (err, data) => {
-//         Post.find({}, (err, data) => {
-//             if (err) {
-//                 console.log(err)
-//             } else {
-//                 res.json(data)
-//             }
-//         })
-//     })
-// })
-
-//Create
+// Create
 posts.post('/', (req, res) => {
-    console.log(req.body, "req")
-    const img = req.body.imgsrc
+    console.log(req.files, "req")
+    const img = req.files.imgsrc.tempFilePath
     cloudinary.uploader.upload(img, (err, data) => {
         if (err) {
             console.log(err, "THIS")

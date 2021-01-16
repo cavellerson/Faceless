@@ -49,34 +49,36 @@ class App extends React.Component {
         console.log(event.target.files[0])
     }
 
-    previewFile = () => {
-        const preview = document.querySelector('img');
-        const file = document.querySelector('input[type=file]').files[0];
-        const reader = new FileReader();
+    // previewFile = () => {
+    //     const preview = document.querySelector('img');
+    //     const file = document.querySelector('input[type=file]').files[0];
+    //     const reader = new FileReader();
       
-        reader.addEventListener("load", function () {
-          // convert image file to base64 string
-          preview.src = reader.result;
-        }, false);
+    //     reader.addEventListener("load", function () {
+    //       // convert image file to base64 string
+    //       preview.src = reader.result;
+    //     }, false);
       
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      }
+    //     if (file) {
+    //       reader.readAsDataURL(file);
+    //     }
+    //   }
     
     create = (event) => {
         event.preventDefault();
         console.log(this.state.file)
-
         let file = this.state.file
-
         let formData = new FormData();
-        formData.append('imgsrc', this.state.file)
+        formData.append('imgsrc', file)
         formData.append('username', this.state.username)
         formData.append('body', this.state.body)
-
+        console.log(formData)
         axios
-            .post('/posts', formData)
+            .post('/posts', formData, {
+                headers: {
+                    'Content-Type': 'form-data'
+                  }
+            })
             .then(
                 (response) => {
                     console.log(response)
@@ -121,7 +123,7 @@ class App extends React.Component {
                             type="file" 
                             name="imgsrc"
                             id="imgsrc"
-                            onChange={this.previewFile}/><br/>
+                            onChange={this.handleFile}/><br/>
 
                         <input
                             type="submit"
