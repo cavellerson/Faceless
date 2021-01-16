@@ -42,35 +42,50 @@ class App extends React.Component {
         })
     }
 
+    previewFile = () => {
+        const preview = document.querySelector('#preview');
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
+      
+        reader.addEventListener("load", function () {
+          // convert image file to base64 string
+          preview.src = reader.result;
+        }, false);
+      
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+
     handleFile = (event) => {
         this.setState({
             file: event.target.files[0]
         })
         console.log(event.target.files[0])
+        this.previewFile()
     }
 
-    // handlUpload = () => {
-    //     event.preventDefault();
-    //     axios
-    //         .post('/posts', formData)
-    //         .then((response) => {
-    //             console.log(response)
-    //         })
-    // }
+    cancelImage = (event) => {
+        event.preventDefault(); 
+        document.getElementById('imgsrc').value = ''
+        document.getElementById('preview').src = ''
+    }  
     
     create = (event) => {
         event.preventDefault();
-        let formData = new FormData()
-        formData = {
-            file: this.state.file
-        }
-        // formData.append('img', this.state.file)
-        // formData.append('username', this.state.username)
-        // formData.append('title', this.state.title)
-        // formData.append('body', this.state.body)
+        console.log(this.state.file)
+        let file = this.state.file
+        let formData = new FormData();
+        formData.append('imgsrc', file)
+        formData.append('username', this.state.username)
+        formData.append('body', this.state.body)
         console.log(formData)
         axios
-            .post('/posts', formData)
+            .post('/posts', formData, {
+                headers: {
+                    'Content-Type': 'form-data'
+                  }
+            })
             .then(
                 (response) => {
                     console.log(response)
@@ -82,16 +97,14 @@ class App extends React.Component {
             )
     }
 
-    
 
     render = ()=>{
         return(
             <div>
-            <h2>One and Done</h2>
+            <h2 id="title">One and Done</h2>
                 <div id="createPostContainer">
                     <form
                     encType="multipart/form-data"
-                    multiple
                     onFocus={this.rngUsername} 
                     onSubmit={this.create}>
 
@@ -115,13 +128,17 @@ class App extends React.Component {
                             type="file" 
                             name="imgsrc"
                             id="imgsrc"
-                            onChange={this.handleFile}/><br/>
+                            onChange={this.handleFile}
+                            /><br/>
+
+                        <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
 
                         <input
                             type="submit"
                             name="submit"
-                            value="Create Post" />
+                            value="Create Post" />    
                     </form>
+                    <img id="preview" src="" alt=""/>
                 </div>
             </div>
         )

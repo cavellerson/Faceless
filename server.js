@@ -3,9 +3,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
-const cors = require('cors');
-// const fileupload = require('express-fileupload');
-
+const fileupload = require('express-fileupload');
 
 
 // Config
@@ -23,10 +21,9 @@ cloudinary.config({
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.use(cors());
-// app.use(fileupload({
-//   useTempFiles : true,
-// }))
+app.use(fileupload({
+  useTempFiles : true,
+}))
 
 // Controllers
 const postsController = require('./controllers/posts_controller.js')
