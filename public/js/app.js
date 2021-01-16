@@ -18,6 +18,7 @@ let randomPokemon = () => {
 
 let pokemon = randomPokemon();
 
+
 //successfully logs a random adjective each time function is invoked
 // console.log(randomAdjective(adjectives)
 // );
@@ -26,7 +27,9 @@ class App extends React.Component {
     state= {
         file: null,
         username: "",
-        posts: []
+        body: "",
+        posts: [],
+        votes: 0
     }
 
     rngUsername = () => {
@@ -78,6 +81,31 @@ class App extends React.Component {
         })
     }
 
+    upvote = (event) => {
+        this.setState({
+            votes: this.state.votes + 1
+        })
+        axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
+            console.log(`${response.data.votes} has been UPVOTED`);
+        })
+    }
+
+
+    downvote = (event) => {
+        this.setState({
+            votes: this.state.votes - 1
+        })
+
+        axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
+            console.log(`${response.data} has been DOWNVOTED`);
+            if (this.state.votes === -3) {
+                axios.delete(`/posts/${event.target.value}`).then((response) => {
+                    console.log(`${response.data.votes} has been deleted`);
+                })
+            }
+        })
+    }
+
     create = (event) => {
         event.preventDefault();
         console.log(this.state.file)
@@ -104,13 +132,23 @@ class App extends React.Component {
             )
     }
         hideForm = () => {
-            // document.querySelector('#createPostContainer').style.display = 'none'
+            document.querySelector('#createPostContainer').style.display = 'none'
         }
+
+
+
+
+        showPosts = () => {
+            this.hideForm();
+            document.querySelector('.posts').style.display = 'block'
+
+        }
+
 
         componentDidMount = () => {
             axios.get('/posts').then((response) => {
                 this.setState({
-                    foods: response.data
+                    posts: response.data
                 })
             })
         }
@@ -154,7 +192,8 @@ class App extends React.Component {
                         <input
                             type="submit"
                             name="submit"
-                            value="Create Post" />
+                            value="Create Post"
+                            onClick={this.showPosts} />
                     </form>
                     <img id="preview" src="" alt=""/>
                 </div>
@@ -166,7 +205,12 @@ class App extends React.Component {
                             <li key={index}>
                             {post.username}
                             <br/>
-
+                            {post.body}
+                            <br/>
+                            <img src={post.imgsrc}/>
+                            <br/>
+                            <button value={post._id} onClick={this.upvote}>↑ {this.state.votes}</button>
+                            <button value={post._id} onClick={this.downvote}>↓ {this.state.votes}</button>
                             </li>
                         )
                     })}
@@ -178,7 +222,11 @@ class App extends React.Component {
     }
 }
 
+
+
 ReactDOM.render(
     <App></App>,
     document.querySelector('#root')
 )
+
+document.querySelector('.posts').style.display = 'none'
