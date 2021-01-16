@@ -8,20 +8,29 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <nav>
-            <a href="about"></a>
-            <a href="developers"></a>
-        </nav>
-        <div id="headerContainer">
-            <img id="logo" src="./imgs/pngegg.png" alt="Guy Fawkes has a nice stache">
-            <h2 id="title">Faceless</h2>
-        </div>
-    </header>
+    <div id="headerContainer">
+        <header>
+            <div id="headerContainer">
+                <img id="logo" src="./imgs/pngegg.png" alt="Guy Fawkes has a nice stache">
+                <h2 id="title">Faceless</h2>
+            </div>
+        </header>
+    </div>
+    
     <!-- React Entry -->
     <div id="root"></div>
 
     <!-- Footer -->
+    <div id="footerContainer">
+        <footer>
+            <nav>
+                <a href="#about">about</a>
+                <a href="#developers">developers</a>
+                <div class="underbar"></div>
+            </nav>
+        </footer>
+    </div>
+    
 
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>

@@ -5,6 +5,12 @@
     font-family: 'Raleway', sans-serif;;
 }
 /* HEADER */
+
+#headerContainer {
+    display: flex;
+    justify-content: center;
+}
+
 #title {
     text-align: center;
     color: white;
@@ -14,6 +20,7 @@ header {
     height: 15vh;
     background-color: blueviolet;
     border-radius: 2.5px;
+    width: 60vw;
 
 }
 
@@ -78,4 +85,40 @@ header {
 
 label, input {
     margin: 5%;
+}
+
+#footerContainer {
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: blueviolet;
+    border-radius: 2.5px;
+}
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1%;
+    width: 60vw;
+    /* border: 1px solid red; */
+}
+
+nav > a {
+    color: white;
+    text-decoration: none;
+    transition: 0.7s;
+}
+
+nav > a:hover {
+    font-weight: bolder;
+}
+
+nav > a::after {
+content: "_";
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
 }
