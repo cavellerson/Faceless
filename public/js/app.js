@@ -42,13 +42,6 @@ class App extends React.Component {
         })
     }
 
-    handleFile = (event) => {
-        this.setState({
-            file: event.target.files[0]
-        })
-        console.log(event.target.files[0])
-    }
-
     previewFile = () => {
         const preview = document.querySelector('#preview');
         const file = document.querySelector('input[type=file]').files[0];
@@ -63,6 +56,14 @@ class App extends React.Component {
           reader.readAsDataURL(file);
         }
       }
+
+    handleFile = (event) => {
+        this.setState({
+            file: event.target.files[0]
+        })
+        console.log(event.target.files[0])
+        this.previewFile()
+    }
 
     cancelImage = (event) => {
         event.preventDefault(); 
@@ -128,7 +129,7 @@ class App extends React.Component {
                             name="imgsrc"
                             id="imgsrc"
                             onChange={this.handleFile}
-                            onChange={this.previewFile}/><br/>
+                            /><br/>
 
                         <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
 

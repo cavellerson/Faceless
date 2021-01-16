@@ -20,16 +20,6 @@ posts.get('/', (req, res) => {
 
 // Create
 posts.post('/', (req, res) => {
-    if (!req.files) {
-        console.log(req.body)
-        Post.create(req.body, (err, data) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.json(data)
-            }
-        })
-    } else {
         console.log(req.files, "req")
         const img = req.files.imgsrc.tempFilePath
         cloudinary.uploader.upload(img, (err, data) => {
@@ -48,7 +38,7 @@ posts.post('/', (req, res) => {
             }
         })
     }
-})
+)
 
 //Update
 posts.put('/:id', (req, res) => {
