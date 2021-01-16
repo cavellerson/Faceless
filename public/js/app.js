@@ -29,7 +29,8 @@ class App extends React.Component {
         username: "",
         body: "",
         posts: [],
-        votes: 0
+        votes: 0,
+        preview: false
     }
 
     rngUsername = () => {
@@ -58,11 +59,12 @@ class App extends React.Component {
         if (file) {
           reader.readAsDataURL(file);
         }
-      }
+    }
 
     handleFile = (event) => {
         this.setState({
-            file: event.target.files[0]
+            file: event.target.files[0],
+            preview: true
         })
         console.log(event.target.files[0])
         this.previewFile()
@@ -71,6 +73,9 @@ class App extends React.Component {
         event.preventDefault();
         document.getElementById('imgsrc').value = ''
         document.getElementById('preview').src = ''
+        this.setState({
+            preview: false
+        })
     }
 
     componentDidMount = () => {
@@ -131,92 +136,93 @@ class App extends React.Component {
                 }
             )
     }
-        hideForm = () => {
-            document.querySelector('#createPostContainer').style.display = 'none'
-        }
+
+    hideForm = () => {
+        document.querySelector('#createPostContainer').style.display = 'none'
+        document.querySelector('#createPostBackground').style.display = 'none'
+    }
 
 
+    showPosts = () => {
+        this.hideForm();
+        document.querySelector('.posts').style.display = 'block'
+
+    }
 
 
-        showPosts = () => {
-            this.hideForm();
-            document.querySelector('.posts').style.display = 'block'
-
-        }
-
-
-        componentDidMount = () => {
-            axios.get('/posts').then((response) => {
-                this.setState({
-                    posts: response.data
-                })
+    componentDidMount = () => {
+        axios.get('/posts').then((response) => {
+            this.setState({
+                posts: response.data
             })
-        }
+        })
+    }
 
 
     render = ()=>{
         return(
-            <div>
-            <h2 id="title">One and Done</h2>
-                <div id="createPostContainer">
-                    <form
-                    encType="multipart/form-data"
-                    onFocus={this.rngUsername}
-                    onSubmit={this.create}>
+            <div id="main">
+                <div id="createPostBackground">
+                    <div id="createPostContainer">
+                        <h3 id="submitTitle">submit a post to enter</h3>
+                        <form
+                        encType="multipart/form-data"
+                        onFocus={this.rngUsername}
+                        onSubmit={this.create}>
 
-                        <input type="hidden" name="username" value={this.state.username}/>
+                            <input type="hidden" name="username" value={this.state.username}/>
 
-                        {/* <label htmlFor="title">Title: </label><br/>
-                        <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            onChange={this.handleChange}/><br/> */}
+                            {/* <label htmlFor="title">Title: </label><br/>
+                            <input
+                                type="text"
+                                name="title"
+                                id="title"
+                                onChange={this.handleChange}/><br/> */}
 
-                        <textarea
-                            name="body"
-                            id="body" cols="30" rows="10" placeholder="whats on your mind..."
-                            onChange={this.handleChange}>
-                        </textarea><br/>
+                            <textarea
+                                name="body"
+                                id="body" cols="30" rows="10" placeholder="whats on your mind..."
+                                onChange={this.handleChange}>
+                            </textarea><br/>
 
-                        <label htmlFor="imgsrc">Select Image:</label><br/>
-                        <input
-                            type="file"
-                            name="imgsrc"
-                            id="imgsrc"
-                            onChange={this.handleFile}
-                            /><br/>
+                            <input
+                                type="file"
+                                name="imgsrc"
+                                id="imgsrc"
+                                onChange={this.handleFile}
+                                /><br/>
 
-                        <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
+                            {(this.state.preview === true)?
+                            <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
+                            : null }
 
-                        <input
-                            type="submit"
-                            name="submit"
-                            value="Create Post"
-                            onClick={this.showPosts} />
-                    </form>
-                    <img id="preview" src="" alt=""/>
+                            <input
+                                type="submit"
+                                name="submit"
+                                value="Create Post"
+                                onClick={this.showPosts} />
+                        </form>
+                        <img id="preview" src="" alt=""/>
+                    </div>
                 </div>
-
                 <ul>
-                <div className="posts">
-                    {this.state.posts.map((post,index) => {
-                        return (
-                            <li key={index}>
-                            {post.username}
-                            <br/>
-                            {post.body}
-                            <br/>
-                            <img src={post.imgsrc}/>
-                            <br/>
-                            <button value={post._id} onClick={this.upvote}>↑ {this.state.votes}</button>
-                            <button value={post._id} onClick={this.downvote}>↓ {this.state.votes}</button>
-                            </li>
-                        )
-                    })}
-                </div>
+                    <div className="posts">
+                        {this.state.posts.map((post,index) => {
+                            return (
+                                <li key={index}>
+                                    {post.username}
+                                <br/>
+                                    {post.body}
+                                <br/>
+                                <img src={post.imgsrc}/>
+                                <br/>
+                                <button value={post._id} onClick={this.upvote}>↑ {this.state.votes}</button>
+                                <button value={post._id} onClick={this.downvote}>↓ {this.state.votes}</button>
+                                </li>
+                            )
+                        })}
+                    </div>
                 </ul>
-
             </div>
         )
     }
