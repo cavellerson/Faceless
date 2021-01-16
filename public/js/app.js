@@ -49,26 +49,32 @@ class App extends React.Component {
         console.log(event.target.files[0])
     }
 
-    // handlUpload = () => {
-    //     event.preventDefault();
-    //     axios
-    //         .post('/posts', formData)
-    //         .then((response) => {
-    //             console.log(response)
-    //         })
-    // }
+    previewFile = () => {
+        const preview = document.querySelector('img');
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
+      
+        reader.addEventListener("load", function () {
+          // convert image file to base64 string
+          preview.src = reader.result;
+        }, false);
+      
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
     
     create = (event) => {
         event.preventDefault();
-        let formData = new FormData()
-        formData = {
-            file: this.state.file
-        }
-        // formData.append('img', this.state.file)
-        // formData.append('username', this.state.username)
-        // formData.append('title', this.state.title)
-        // formData.append('body', this.state.body)
-        console.log(formData)
+        console.log(this.state.file)
+
+        let file = this.state.file
+
+        let formData = new FormData();
+        formData.append('imgsrc', this.state.file)
+        formData.append('username', this.state.username)
+        formData.append('body', this.state.body)
+
         axios
             .post('/posts', formData)
             .then(
@@ -115,13 +121,14 @@ class App extends React.Component {
                             type="file" 
                             name="imgsrc"
                             id="imgsrc"
-                            onChange={this.handleFile}/><br/>
+                            onChange={this.previewFile}/><br/>
 
                         <input
                             type="submit"
                             name="submit"
                             value="Create Post" />
                     </form>
+                    <img src="" alt=""/>
                 </div>
             </div>
         )

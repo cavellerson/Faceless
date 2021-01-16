@@ -34,7 +34,7 @@ posts.get('/', (req, res) => {
 //Create
 posts.post('/', (req, res) => {
     console.log(req.body, "req")
-    const img = req.body.file
+    const img = req.body.imgsrc
     cloudinary.uploader.upload(img, (err, data) => {
         if (err) {
             console.log(err, "THIS")

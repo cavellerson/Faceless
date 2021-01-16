@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
 const cors = require('cors');
-// const fileupload = require('express-fileupload');
+const fileupload = require('express-fileupload');
 
 
 
