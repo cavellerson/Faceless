@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
 *{
     color: blueviolet;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+#title {
+    text-align: center;
+}
+
+#createPostContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+label, input {
+    margin: 1%;
+}
+
+#imgsrc {
+    position: relative;
+    z-index: 2;
 }

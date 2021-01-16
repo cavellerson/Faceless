@@ -49,20 +49,26 @@ class App extends React.Component {
         console.log(event.target.files[0])
     }
 
-    // previewFile = () => {
-    //     const preview = document.querySelector('img');
-    //     const file = document.querySelector('input[type=file]').files[0];
-    //     const reader = new FileReader();
+    previewFile = () => {
+        const preview = document.querySelector('#preview');
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
       
-    //     reader.addEventListener("load", function () {
-    //       // convert image file to base64 string
-    //       preview.src = reader.result;
-    //     }, false);
+        reader.addEventListener("load", function () {
+          // convert image file to base64 string
+          preview.src = reader.result;
+        }, false);
       
-    //     if (file) {
-    //       reader.readAsDataURL(file);
-    //     }
-    //   }
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+
+    cancelImage = (event) => {
+        event.preventDefault(); 
+        document.getElementById('imgsrc').value = ''
+        document.getElementById('preview').src = ''
+    }  
     
     create = (event) => {
         event.preventDefault();
@@ -90,16 +96,14 @@ class App extends React.Component {
             )
     }
 
-    
 
     render = ()=>{
         return(
             <div>
-            <h2>One and Done</h2>
+            <h2 id="title">One and Done</h2>
                 <div id="createPostContainer">
                     <form
                     encType="multipart/form-data"
-                    multiple
                     onFocus={this.rngUsername} 
                     onSubmit={this.create}>
 
@@ -123,14 +127,17 @@ class App extends React.Component {
                             type="file" 
                             name="imgsrc"
                             id="imgsrc"
-                            onChange={this.handleFile}/><br/>
+                            onChange={this.handleFile}
+                            onChange={this.previewFile}/><br/>
+
+                        <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
 
                         <input
                             type="submit"
                             name="submit"
-                            value="Create Post" />
+                            value="Create Post" />    
                     </form>
-                    <img src="" alt=""/>
+                    <img id="preview" src="" alt=""/>
                 </div>
             </div>
         )
