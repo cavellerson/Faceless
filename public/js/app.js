@@ -49,6 +49,14 @@ class App extends React.Component {
         console.log(event.target.files[0])
     }
 
+    componentDidMount = () => {
+        axios.get('/posts').then((response) => {
+            this.setState({
+                posts: response.data
+            })
+        })
+    }
+
     // handlUpload = () => {
     //     event.preventDefault();
     //     axios
@@ -81,7 +89,17 @@ class App extends React.Component {
                 }
             )
     }
+        hideForm = () => {
+            // document.querySelector('#createPostContainer').style.display = 'none'
+        }
 
+        componentDidMount = () => {
+            axios.get('/posts').then((response) => {
+                this.setState({
+                    foods: response.data
+                })
+            })
+        }
 
 
     render = ()=>{
@@ -109,7 +127,7 @@ class App extends React.Component {
                             id="body" cols="30" rows="10" placeholder="whats on your mind..."
                             onChange={this.handleChange}>
                         </textarea><br/>
-                        
+
                         <label htmlFor="imgsrc">Select Image:</label><br/>
                         <input
                             type="file"
@@ -120,9 +138,27 @@ class App extends React.Component {
                         <input
                             type="submit"
                             name="submit"
-                            value="Create Post" />
+                            value="Create Post"
+                            // onClick={this.hideForm}
+                            />
                     </form>
+
                 </div>
+
+                <ul>
+                <div className="posts">
+                    {this.state.posts.map((post,index) => {
+                        return (
+                            <li key={index}>
+                            {post.username}
+                            <br/>
+
+                            </li>
+                        )
+                    })}
+                </div>
+                </ul>
+
             </div>
         )
     }
