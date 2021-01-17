@@ -86,7 +86,7 @@ class App extends React.Component {
             votes: this.state.votes + 1
         })
         axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
-            console.log(`${response.data.votes} has been UPVOTED`);
+            console.log(`${response} has been UPVOTED`);
         })
     }
 
@@ -97,8 +97,8 @@ class App extends React.Component {
         })
 
         axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
-            console.log(`${response.data} has been DOWNVOTED`);
-            if (this.state.votes === -3) {
+            console.log(`${response} has been DOWNVOTED`);
+            if (this.state.vote === -3) {
                 axios.delete(`/posts/${event.target.value}`).then((response) => {
                     console.log(`${response.data.votes} has been deleted`);
                 })
