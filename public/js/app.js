@@ -84,26 +84,6 @@ class App extends React.Component {
         })
     }
 
-    componentDidMount = () => {
-        axios.get('/posts').then((response) => {
-            this.setState({
-                posts: response.data
-            })
-        })
-    }
-
-    // upvote = (event) => {
-    //     this.setState({
-    //         [event.target.id]: event.target.value + 1
-    //     })
-    //     axios.put(`/posts/${event.target.alt}`, event.target.value).then((response) => {
-    //         console.log(response.data)
-    //         console.log(`${response.data} has been UPVOTED`);
-    //         this.setState({
-    //             votes: this.state.votes
-    //         })
-    //     })
-    // }
     getVotes = (event) => {
         axios
             .get('/posts/' + event.target.id)
@@ -122,22 +102,6 @@ class App extends React.Component {
             )
             this.componentDidMount()
     }
-
-
-    // downvote = (event) => {
-    //     this.setState({
-    //         votes: this.state.votes - 1
-    //     })
-
-    //     axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
-    //         console.log(`${response.data} has been DOWNVOTED`);
-    //         if (this.state.votes === -3) {
-    //             axios.delete(`/posts/${event.target.value}`).then((response) => {
-    //                 console.log(`${response.data.votes} has been deleted`);
-    //             })
-    //         }
-    //     })
-    // }
 
     create = (event) => {
         event.preventDefault();
@@ -170,13 +134,11 @@ class App extends React.Component {
         document.querySelector('#createPostBackground').style.display = 'none'
     }
 
-
     showPosts = () => {
         this.hideForm();
         document.querySelector('.posts').style.display = 'block'
 
     }
-
 
     componentDidMount = () => {
         axios.get('/posts').then((response) => {
@@ -185,7 +147,6 @@ class App extends React.Component {
             })
         })
     }
-
 
     render = ()=>{
         return(
