@@ -84,6 +84,9 @@ class App extends React.Component {
         })
     }
 
+    hideButtons = (event) => {
+        event.currentTarget.style.display = 'none'
+    }
 
     getVotes = (event) => {
         axios
@@ -91,20 +94,31 @@ class App extends React.Component {
             .then((response) => {
                 console.log(response.data.votes)
                 this.setState({
-                    votes: response.data.votes + 1
+                    votes: response.data.votes
                 })
             })
     }
     upvote = (event) => {
         let id = event.target.id
         axios
-            .put('/posts/' + id, {votes: this.state.votes})
+            .put('/posts/' + id, {votes: this.state.votes + 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
                     posts: response.data.reverse()
                 })
-                document.getElementById(`${id}`).style.display = 'none'
+            })
+    }
+
+    downvote = (event) => {
+        let id = event.target.id
+        axios
+            .put('/posts/' + id, {votes: this.state.votes - 1})
+            .then((response) => {
+                console.log(response)
+                this.setState({
+                    posts: response.data.reverse()
+                })
             })
     }
 
@@ -214,20 +228,23 @@ class App extends React.Component {
                         <br/>
                         <img src={post.imgsrc}/>
                         <br/>
-                        <button 
-                            className="upvote"
-                            id={post._id}
-                            value={post.votes} 
-                            onClick={this.upvote}
-                            onMouseEnter={this.getVotes}>
-                                ↑</button>
+                        <div onClick={this.hideButtons}>
+                            <button 
+                                className="vote"
+                                id={post._id}
+                                value={post.votes} 
+                                onClick={this.upvote}
+                                onMouseEnter={this.getVotes}>
+                                    ↑</button>
 
-                        {/* <button
-                            id="votes"
-                            alt={post._id} 
-                            value={post.votes} 
-                            onClick={this.downvote}>
-                                ↓</button> */}
+                            <button 
+                                className="vote"
+                                id={post._id}
+                                value={post.votes}
+                                onClick={this.downvote}
+                                onMouseEnter={this.getVotes}>
+                                    ↓</button>
+                        </div>
                         <span>votes: {post.votes}</span>
                         </li>
                     )
