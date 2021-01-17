@@ -39,7 +39,7 @@ class App extends React.Component {
             username: `${randomAdjective(adjectives)} ${pokemon}`
         })
     }
-
+    posts
     handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
@@ -284,6 +284,12 @@ class App extends React.Component {
                                     ↓</button>
                         </div>
                         <span>votes: {post.votes}</span>
+                        <h4>Comments: </h4><br/>
+                        <ul>
+                            {post.comments.map((comment, index) => {
+                                <li>{comment}</li>
+                            })}
+                        </ul>
                         <form onClick={this.comment}>
                             <input 
                                 type="text" name="comments"
