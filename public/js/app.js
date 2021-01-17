@@ -112,6 +112,7 @@ class App extends React.Component {
 
     downvote = (event) => {
         let id = event.target.id
+        let votes = event.target.value
         axios
             .put('/posts/' + id, {votes: this.state.votes - 1})
             .then((response) => {
@@ -119,8 +120,23 @@ class App extends React.Component {
                 this.setState({
                     posts: response.data.reverse()
                 })
+                console.log(votes-1);
+                if (votes <= -3) {
+                    axios.delete(`/posts/${id}`).then((response) => {
+                        this.setState({
+                            posts: response.data.reverse()
+                        })
+                        console.log(response + "has been deleted");
+                    })
+                }
+
             })
+
+
+
     }
+
+
 
     create = (event) => {
         event.preventDefault();
@@ -229,15 +245,15 @@ class App extends React.Component {
                         <img src={post.imgsrc}/>
                         <br/>
                         <div onClick={this.hideButtons}>
-                            <button 
+                            <button
                                 className="vote"
                                 id={post._id}
-                                value={post.votes} 
+                                value={post.votes}
                                 onClick={this.upvote}
                                 onMouseEnter={this.getVotes}>
                                     ↑</button>
 
-                            <button 
+                            <button
                                 className="vote"
                                 id={post._id}
                                 value={post.votes}
