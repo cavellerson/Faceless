@@ -171,7 +171,7 @@ class App extends React.Component {
 
     showPosts = () => {
         this.hideForm();
-        document.querySelector('.posts').style.display = 'block'
+        document.querySelector('#posts').style.display = 'block'
 
     }
 
@@ -257,11 +257,11 @@ class App extends React.Component {
                 </div>
             </div>
 
-            <ul>
-            <div className="posts">
+            <ul id="postContainer">
+            <div id="posts">
                 {this.state.posts.map((post,index) => {
                     return (
-                        <li key={index}>
+                        <li className="post" key={index}>
                             <span>created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
                         <br/>
                             {post.body}
@@ -323,5 +323,5 @@ ReactDOM.render(
     document.querySelector('#root')
 )
 
-document.querySelector('.posts').style.display = 'none'
+document.querySelector('#posts').style.display = 'none'
 document.querySelector('#preview').style.display = 'none'

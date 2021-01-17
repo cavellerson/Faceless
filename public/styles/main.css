@@ -115,7 +115,8 @@ label, input {
     width: 80%;
     height: auto;
     /* border: 1px solid magenta; */
-    margin: 2.5%
+    margin: 2.5%;
+    margin-bottom: 5%;
 }
 
 

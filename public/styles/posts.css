@@ -1,0 +1,21 @@
+#posts {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    height: 75vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    /* border: 2px solid green; */
+    padding: 2.5%;
+}
+
+.post {
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-bottom: 2.5%;
+    padding: 1%;
+    width: 50%;
+    list-style: none;
+}
