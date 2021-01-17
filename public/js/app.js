@@ -285,11 +285,7 @@ class App extends React.Component {
                         </div>
                         <span>votes: {post.votes}</span>
                         <h4>Comments: </h4><br/>
-                        <ul>
-                            {post.comments.map((comment, index) => {
-                                <li>{comment}</li>
-                            })}
-                        </ul>
+                        <p>{post.comments}</p>
                         <form onClick={this.comment}>
                             <input 
                                 type="text" name="comments"

@@ -66,7 +66,10 @@ posts.put('/:id', (req, res) => {
     console.log(req.body)
     Post.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        {
+            votes: req.body.votes,
+            $addToSet : { comments: req.body.comments }
+        },
         { new: true },
         (err, data) => {
             if (err) {
