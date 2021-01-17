@@ -7,11 +7,22 @@ const cloudinary = require('cloudinary').v2;
 const Post = require("../models/post.js");
 
 
-//Read
+//Read All
 posts.get('/', (req, res) => {
     Post.find({}, (err, data) => {
         if (err) {
             res.send(err)
+        } else {
+            res.json(data)
+        }
+    })
+})
+
+//Read One
+posts.get('/:id', (req, res) => {
+    Post.findById(req.params.id, (err, data) => {
+        if (err) {
+            console.log(err)
         } else {
             res.json(data)
         }

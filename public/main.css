@@ -20,7 +20,7 @@ header {
     height: 15vh;
     background-color: blueviolet;
     border-radius: 2.5px;
-    width: 60vw;
+    width: 50vw;
 }
 
 #headerContainer {
@@ -127,7 +127,7 @@ footer {
     display: flex;
     justify-content: center;
     margin: 1%;
-    width: 60vw;
+    width: 50vw;
     /* background-color: #333; */
     overflow: hidden;
     /* border: 1px solid red; */
