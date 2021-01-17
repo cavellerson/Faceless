@@ -84,6 +84,7 @@ class App extends React.Component {
         })
     }
 
+
     getVotes = (event) => {
         axios
             .get('/posts/' + event.target.id)
@@ -120,11 +121,7 @@ class App extends React.Component {
             })
             .then(
                 (response) => {
-                    console.log(response)
-                    // this.setState({
-                    //     username: "",
-                    //     posts: response.data
-                    // })
+                    this.componentDidMount()
                 }
             )
     }
@@ -203,7 +200,7 @@ class App extends React.Component {
 
             <ul>
             <div className="posts">
-                {this.state.posts.map((post,index) => {
+                {this.state.posts.reverse().map((post,index) => {
                     return (
                         <li key={index}>
                             {post.username}
