@@ -98,10 +98,15 @@ class App extends React.Component {
     upvote = (event) => {
         axios
             .put('/posts/' + event.target.id, {votes: this.state.votes})
-            .then(
+            .then((response) => {
+                event.persist()
+                console.log(response)
+                this.setState({
+                    posts: response.data
+                })
                 document.getElementById(`${event.target.id}`).style.display = 'none'
-            )
-            this.componentDidMount()
+            })
+            // this.componentDidMount()
     }
 
     create = (event) => {
