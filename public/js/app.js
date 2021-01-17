@@ -69,10 +69,16 @@ class App extends React.Component {
         console.log(event.target.files[0])
         this.previewFile()
     }
+
+    showPreview = () => {
+        document.querySelector('#preview').style.display = 'block'
+    }
+
     cancelImage = (event) => {
         event.preventDefault();
         document.getElementById('imgsrc').value = ''
         document.getElementById('preview').src = ''
+        document.querySelector('#preview').style.display = 'none'
         this.setState({
             preview: false
         })
@@ -190,6 +196,7 @@ class App extends React.Component {
                                 name="imgsrc"
                                 id="imgsrc"
                                 onChange={this.handleFile}
+                                onClick={this.showPreview}
                                 /><br/>
 
                             {(this.state.preview === true)?
@@ -202,7 +209,9 @@ class App extends React.Component {
                                 value="Create Post"
                                 onClick={this.showPosts} />
                         </form>
-                        <img id="preview" src="" alt=""/>
+                        <div id="previewContainer">
+                            <img id="preview" src="" alt=""/>
+                        </div>
                     </div>
                 </div>
                 <ul>
@@ -236,3 +245,4 @@ ReactDOM.render(
 )
 
 document.querySelector('.posts').style.display = 'none'
+document.querySelector('#preview').style.display = 'none'
