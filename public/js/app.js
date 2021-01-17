@@ -185,6 +185,7 @@ class App extends React.Component {
 
     comment = (event) => {
         event.preventDefault();
+        document.querySelector('#comment').value = ''
         let id = event.target.id
         console.log(id);
         axios
@@ -193,6 +194,7 @@ class App extends React.Component {
                 {comments: [this.state.comment]})
             .then((response) => {
                 this.setState({
+                    posts: response.data.reverse(),
                     comment: ''
                 })
             })        
@@ -287,11 +289,15 @@ class App extends React.Component {
                         <span>votes: {post.votes}</span>
                         <h4>Comments: </h4><br/>
                         <p>{post.comments}</p>
-                        <form onClick={this.comment}>
-                            <input 
+                        <form 
+                            onClick={this.comment}
+                            >
+                            <input
+                                id="comment" 
                                 type="text" name="comments"
-                                value={this.state.comment}
-                                onChange={this.handleComment}/>
+                                // value={this.state.comment}
+                                onChange={this.handleComment}
+                                />
                             <input
                                 id={post._id} 
                                 type="submit"
