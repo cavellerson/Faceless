@@ -104,23 +104,22 @@ class App extends React.Component {
     //         })
     //     })
     // }
-
-    upvote = (event) => {
+    getVotes = (event) => {
         axios
             .get('/posts/' + event.target.id)
             .then((response) => {
                 console.log(response.data.votes)
-                let upvote = response.data.votes + 1
                 this.setState({
-                    votes: upvote
+                    votes: response.data.votes + 1
                 })
-            }).then(
-                axios
-            .put('/posts/' + event.target.id, {votes: this.state.votes})
-            .then((response) => {
-                // console.log(response)
             })
-        )
+    }
+    upvote = (event) => {
+        axios
+            .put('/posts/' + event.target.id, {votes: this.state.votes})
+            .then(
+                document.querySelector('.upvote').style.display = 'none'
+            )
 
     }
 
@@ -253,9 +252,11 @@ class App extends React.Component {
                         <img src={post.imgsrc}/>
                         <br/>
                         <button 
+                            className="upvote"
                             id={post._id}
                             value={post.votes} 
-                            onClick={this.upvote}>
+                            onClick={this.upvote}
+                            onMouseEnter={this.getVotes}>
                                 ↑</button>
 
                         {/* <button
