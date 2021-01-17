@@ -167,10 +167,12 @@ class App extends React.Component {
 
     render = ()=>{
         return(
-            <div id="main">
+            <div>
+                <div id="main">
                 <div id="createPostBackground">
                     <div id="createPostContainer">
                         <h3 id="submitTitle">submit a post to enter</h3>
+                        <span>{this.state.username}</span>
                         <form
                         encType="multipart/form-data"
                         onFocus={this.rngUsername}
@@ -214,24 +216,26 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ul>
-                    <div className="posts">
-                        {this.state.posts.map((post,index) => {
-                            return (
-                                <li key={index}>
-                                    {post.username}
-                                <br/>
-                                    {post.body}
-                                <br/>
-                                <img src={post.imgsrc}/>
-                                <br/>
-                                <button value={post._id} onClick={this.upvote}>↑ {this.state.votes}</button>
-                                <button value={post._id} onClick={this.downvote}>↓ {this.state.votes}</button>
-                                </li>
-                            )
-                        })}
-                    </div>
-                </ul>
+            </div>
+
+            <ul>
+            <div className="posts">
+                {this.state.posts.map((post,index) => {
+                    return (
+                        <li key={index}>
+                            {post.username}
+                        <br/>
+                            {post.body}
+                        <br/>
+                        <img src={post.imgsrc}/>
+                        <br/>
+                        <button value={post._id} onClick={this.upvote}>↑ {this.state.votes}</button>
+                        <button value={post._id} onClick={this.downvote}>↓ {this.state.votes}</button>
+                        </li>
+                    )
+                })}
+            </div>
+        </ul>
             </div>
         )
     }
