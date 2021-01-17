@@ -29,7 +29,8 @@ class App extends React.Component {
         username: "",
         body: "",
         posts: [],
-        votes: 0
+        votes: 0,
+        preview: false
     }
 
     rngUsername = () => {
@@ -58,39 +59,40 @@ class App extends React.Component {
         if (file) {
           reader.readAsDataURL(file);
         }
-      }
+    }
 
     handleFile = (event) => {
         this.setState({
-            file: event.target.files[0]
+            file: event.target.files[0],
+            preview: true
         })
         console.log(event.target.files[0])
         this.previewFile()
     }
+
+    showPreview = () => {
+        document.querySelector('#preview').style.display = 'block'
+    }
+
     cancelImage = (event) => {
         event.preventDefault();
         document.getElementById('imgsrc').value = ''
         document.getElementById('preview').src = ''
-    }
-
-    componentDidMount = () => {
-        axios.get('/posts').then((response) => {
-            this.setState({
-                posts: response.data
-            })
-        })
-    }
-
-    upvote = (event) => {
+        document.querySelector('#preview').style.display = 'none'
         this.setState({
+<<<<<<< HEAD
             votes: this.state.votes + 1
         })
         axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
             console.log(`${response} has been UPVOTED`);
+=======
+            preview: false
+>>>>>>> 7563776ae8389d40d220bcefdd525bdb65acad43
         })
     }
 
 
+<<<<<<< HEAD
     downvote = (event) => {
         this.setState({
             votes: this.state.votes - 1
@@ -101,9 +103,29 @@ class App extends React.Component {
             if (this.state.vote === -3) {
                 axios.delete(`/posts/${event.target.value}`).then((response) => {
                     console.log(`${response.data.votes} has been deleted`);
+=======
+    getVotes = (event) => {
+        axios
+            .get('/posts/' + event.target.id)
+            .then((response) => {
+                console.log(response.data.votes)
+                this.setState({
+                    votes: response.data.votes + 1
+>>>>>>> 7563776ae8389d40d220bcefdd525bdb65acad43
                 })
-            }
-        })
+            })
+    }
+    upvote = (event) => {
+        let id = event.target.id
+        axios
+            .put('/posts/' + id, {votes: this.state.votes})
+            .then((response) => {
+                console.log(response)
+                this.setState({
+                    posts: response.data.reverse()
+                })
+                document.getElementById(`${id}`).style.display = 'none'
+            })
     }
 
     create = (event) => {
@@ -124,99 +146,114 @@ class App extends React.Component {
             .then(
                 (response) => {
                     console.log(response)
-                    // this.setState({
-                    //     username: "",
-                    //     posts: response.data
-                    // })
+                    this.componentDidMount()
                 }
             )
     }
-        hideForm = () => {
-            document.querySelector('#createPostContainer').style.display = 'none'
-        }
 
+    hideForm = () => {
+        document.querySelector('#createPostContainer').style.display = 'none'
+        document.querySelector('#createPostBackground').style.display = 'none'
+    }
 
+    showPosts = () => {
+        this.hideForm();
+        document.querySelector('.posts').style.display = 'block'
 
+    }
 
-        showPosts = () => {
-            this.hideForm();
-            document.querySelector('.posts').style.display = 'block'
-
-        }
-
-
-        componentDidMount = () => {
-            axios.get('/posts').then((response) => {
-                this.setState({
-                    posts: response.data
-                })
+    componentDidMount = () => {
+        axios.get('/posts').then((response) => {
+            this.setState({
+                posts: response.data.reverse()
             })
-        }
-
+        })
+    }
 
     render = ()=>{
         return(
             <div>
-            <h2 id="title">One and Done</h2>
-                <div id="createPostContainer">
-                    <form
-                    encType="multipart/form-data"
-                    onFocus={this.rngUsername}
-                    onSubmit={this.create}>
+                <div id="main">
+                <div id="createPostBackground">
+                    <div id="createPostContainer">
+                        <h3 id="submitTitle">submit a post to enter</h3>
+                        <span>{this.state.username}</span>
+                        <form
+                        encType="multipart/form-data"
+                        onFocus={this.rngUsername}
+                        onSubmit={this.create}>
 
-                        <input type="hidden" name="username" value={this.state.username}/>
+                            <input type="hidden" name="username" value={this.state.username}/>
 
-                        {/* <label htmlFor="title">Title: </label><br/>
-                        <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            onChange={this.handleChange}/><br/> */}
+                            {/* <label htmlFor="title">Title: </label><br/>
+                            <input
+                                type="text"
+                                name="title"
+                                id="title"
+                                onChange={this.handleChange}/><br/> */}
 
-                        <textarea
-                            name="body"
-                            id="body" cols="30" rows="10" placeholder="whats on your mind..."
-                            onChange={this.handleChange}>
-                        </textarea><br/>
+                            <textarea
+                                name="body"
+                                id="body" cols="30" rows="10" placeholder="whats on your mind..."
+                                onChange={this.handleChange}>
+                            </textarea><br/>
 
-                        <label htmlFor="imgsrc">Select Image:</label><br/>
-                        <input
-                            type="file"
-                            name="imgsrc"
-                            id="imgsrc"
-                            onChange={this.handleFile}
-                            /><br/>
+                            <input
+                                type="file"
+                                name="imgsrc"
+                                id="imgsrc"
+                                onChange={this.handleFile}
+                                onClick={this.showPreview}
+                                /><br/>
 
-                        <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
+                            {(this.state.preview === true)?
+                            <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
+                            : null }
 
-                        <input
-                            type="submit"
-                            name="submit"
-                            value="Create Post"
-                            onClick={this.showPosts} />
-                    </form>
-                    <img id="preview" src="" alt=""/>
+                            <input
+                                type="submit"
+                                name="submit"
+                                value="Create Post"
+                                onClick={this.showPosts} />
+                        </form>
+                        <div id="previewContainer">
+                            <img id="preview" src="" alt=""/>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <ul>
-                <div className="posts">
-                    {this.state.posts.map((post,index) => {
-                        return (
-                            <li key={index}>
+            <ul>
+            <div className="posts">
+                {this.state.posts.map((post,index) => {
+                    return (
+                        <li key={index}>
                             {post.username}
-                            <br/>
+                        <br/>
                             {post.body}
-                            <br/>
-                            <img src={post.imgsrc}/>
-                            <br/>
-                            <button value={post._id} onClick={this.upvote}>↑ {this.state.votes}</button>
-                            <button value={post._id} onClick={this.downvote}>↓ {this.state.votes}</button>
-                            </li>
-                        )
-                    })}
-                </div>
-                </ul>
+                        <br/>
+                        <img src={post.imgsrc}/>
+                        <br/>
+                        <button 
+                            className="upvote"
+                            id={post._id}
+                            value={post.votes} 
+                            onClick={this.upvote}
+                            onMouseEnter={this.getVotes}>
+                                ↑</button>
 
+                        {/* <button
+                            id="votes"
+                            alt={post._id} 
+                            value={post.votes} 
+                            onClick={this.downvote}>
+                                ↓</button> */}
+                        <span>votes: {post.votes}</span>
+                        </li>
+                    )
+                })}
+            </div>
+        </ul>
             </div>
         )
     }
@@ -230,3 +267,4 @@ ReactDOM.render(
 )
 
 document.querySelector('.posts').style.display = 'none'
+document.querySelector('#preview').style.display = 'none'
