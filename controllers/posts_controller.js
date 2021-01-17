@@ -63,6 +63,7 @@ posts.post('/', (req, res) => {
 
 //Update
 posts.put('/:id', (req, res) => {
+    console.log(req.body)
     Post.findByIdAndUpdate(
         req.params.id,
         req.body,

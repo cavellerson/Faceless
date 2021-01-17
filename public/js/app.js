@@ -106,9 +106,22 @@ class App extends React.Component {
     // }
 
     upvote = (event) => {
-        this.setState({
-            votes: this.state.votes +1
-        })
+        axios
+            .get('/posts/' + event.target.id)
+            .then((response) => {
+                console.log(response.data.votes)
+                let upvote = response.data.votes + 1
+                this.setState({
+                    votes: upvote
+                })
+            }).then(
+                axios
+            .put('/posts/' + event.target.id, {votes: this.state.votes})
+            .then((response) => {
+                // console.log(response)
+            })
+        )
+
     }
 
 
