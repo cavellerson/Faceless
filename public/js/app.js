@@ -120,24 +120,24 @@ class App extends React.Component {
             .then(
                 document.querySelector('.upvote').style.display = 'none'
             )
-
+            this.componentDidMount()
     }
 
 
-    downvote = (event) => {
-        this.setState({
-            votes: this.state.votes - 1
-        })
+    // downvote = (event) => {
+    //     this.setState({
+    //         votes: this.state.votes - 1
+    //     })
 
-        axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
-            console.log(`${response.data} has been DOWNVOTED`);
-            if (this.state.votes === -3) {
-                axios.delete(`/posts/${event.target.value}`).then((response) => {
-                    console.log(`${response.data.votes} has been deleted`);
-                })
-            }
-        })
-    }
+    //     axios.put(`/posts/${event.target.value}`, this.state.votes).then((response) => {
+    //         console.log(`${response.data} has been DOWNVOTED`);
+    //         if (this.state.votes === -3) {
+    //             axios.delete(`/posts/${event.target.value}`).then((response) => {
+    //                 console.log(`${response.data.votes} has been deleted`);
+    //             })
+    //         }
+    //     })
+    // }
 
     create = (event) => {
         event.preventDefault();
@@ -265,7 +265,7 @@ class App extends React.Component {
                             value={post.votes} 
                             onClick={this.downvote}>
                                 ↓</button> */}
-                        {post.votes}
+                        <span>votes: {post.votes}</span>
                         </li>
                     )
                 })}
