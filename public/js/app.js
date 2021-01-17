@@ -46,6 +46,12 @@ class App extends React.Component {
         })
     }
 
+    handleComment = (event) => {
+        this.setState({
+            comment: event.target.value
+        })
+    }
+
     previewFile = () => {
         const preview = document.querySelector('#preview');
         const file = document.querySelector('input[type=file]').files[0];
@@ -89,8 +95,9 @@ class App extends React.Component {
     }
 
     getVotes = (event) => {
+        let id = event.target.id
         axios
-            .get('/posts/' + event.target.id)
+            .get(`/posts/${id}`)
             .then((response) => {
                 console.log(response.data.votes)
                 this.setState({
@@ -101,7 +108,7 @@ class App extends React.Component {
     upvote = (event) => {
         let id = event.target.id
         axios
-            .put('/posts/' + id, {votes: this.state.votes + 1})
+            .put(`/posts/${id}`, {votes: this.state.votes + 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -114,7 +121,7 @@ class App extends React.Component {
         let id = event.target.id
         let votes = event.target.value
         axios
-            .put('/posts/' + id, {votes: this.state.votes - 1})
+            .put(`/posts/${id}`, {votes: this.state.votes - 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -131,12 +138,7 @@ class App extends React.Component {
                 }
 
             })
-
-
-
     }
-
-
 
     create = (event) => {
         event.preventDefault();
@@ -180,9 +182,29 @@ class App extends React.Component {
         })
     }
 
+    comment = (event) => {
+        event.preventDefault();
+        let id = event.target.id
+        console.log(id);
+        axios
+            .put(
+                `/posts/${id}`,
+                {comments: [this.state.comment]})
+            .then((response) => {
+                this.setState({
+                    comment: ''
+                })
+            })        
+    }
+
+    // dateSort = () => {
+    //     console.log(this.state.posts[0].date)
+    // }
+
     render = ()=>{
         return(
             <div>
+                {/* <button onClick={this.dateSort}>Date Sort</button> */}
                 <div id="main">
                 <div id="createPostBackground">
                     <div id="createPostContainer">
@@ -262,6 +284,15 @@ class App extends React.Component {
                                     ↓</button>
                         </div>
                         <span>votes: {post.votes}</span>
+                        <form onClick={this.comment}>
+                            <input 
+                                type="text" name="comments"
+                                onChange={this.handleComment}/>
+                            <input
+                                id={post._id} 
+                                type="submit"
+                                value="create comment"/>    
+                        </form>
                         </li>
                     )
                 })}

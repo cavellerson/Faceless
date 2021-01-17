@@ -4,6 +4,7 @@ const postSchema = new mongoose.Schema ({
     username: {type: String, required: true},
     // title: {type: String, required: true},
     body: {type: String, required: true},
+    comments: [{type: String}],
     imgsrc: {type: String},
     votes: {type: Number, default: 0},
     date: {type: Date, default: () => {return Date.now()}}
