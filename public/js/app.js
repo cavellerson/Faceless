@@ -30,7 +30,8 @@ class App extends React.Component {
         body: "",
         posts: [],
         votes: 0,
-        preview: false
+        preview: false,
+        comment: ""
     }
 
     rngUsername = () => {
@@ -289,6 +290,7 @@ class App extends React.Component {
                         <form onClick={this.comment}>
                             <input 
                                 type="text" name="comments"
+                                value={this.state.comment}
                                 onChange={this.handleComment}/>
                             <input
                                 id={post._id} 
