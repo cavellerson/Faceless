@@ -241,10 +241,6 @@ class App extends React.Component {
                                 onClick={this.showPreview}
                                 /><br/>
 
-                            {(this.state.preview === true)?
-                            <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
-                            : null }
-
                             <input
                                 type="submit"
                                 name="submit"
@@ -252,6 +248,9 @@ class App extends React.Component {
                                 onClick={this.showPosts} />
                         </form>
                         <div id="previewContainer">
+                            {(this.state.preview === true)?
+                            <div id="cancelDiv" title="Cancel" onClick={this.cancelImage}><ion-icon id="cancelButton"name="close-circle-outline"></ion-icon></div>
+                            : null }
                             <img id="preview" src="" alt=""/>
                         </div>
                     </div>
@@ -263,7 +262,7 @@ class App extends React.Component {
                 {this.state.posts.map((post,index) => {
                     return (
                         <li key={index}>
-                            {post.username}
+                            <span>created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
                         <br/>
                             {post.body}
                         <br/>
@@ -286,9 +285,13 @@ class App extends React.Component {
                                 onMouseEnter={this.getVotes}>
                                     ↓</button>
                         </div>
-                        <span>votes: {post.votes}</span>
-                        <h4>Comments: </h4><br/>
-                        <p>{post.comments}</p>
+                        <span>votes: {post.votes}</span><br/>
+                        <span id="commentsTitle">Comments: </span>
+                        {post.comments.map((comment, index) => {
+                            return (
+                                <div className="comment" key={index}>{comment}</div>
+                                )
+                        })}
                         <form 
                             onClick={this.comment}
                             >

@@ -101,6 +101,16 @@ label, input {
     width: 33.333%
 }
 
+#cancelDiv {
+    align-self: flex-end;
+    margin: 1%;
+}
+
+#cancelButton:hover {
+    color: rgb(228, 34, 34);
+    cursor: pointer;
+}
+
 #preview {
     width: 80%;
     height: auto;
