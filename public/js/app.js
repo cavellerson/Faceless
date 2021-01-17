@@ -99,7 +99,7 @@ class App extends React.Component {
         axios
             .put('/posts/' + event.target.id, {votes: this.state.votes})
             .then(
-                document.querySelector('.upvote').style.display = 'none'
+                document.getElementById(`${event.target.id}`).style.display = 'none'
             )
             this.componentDidMount()
     }
@@ -121,6 +121,7 @@ class App extends React.Component {
             })
             .then(
                 (response) => {
+                    console.log(response)
                     this.componentDidMount()
                 }
             )
@@ -140,7 +141,7 @@ class App extends React.Component {
     componentDidMount = () => {
         axios.get('/posts').then((response) => {
             this.setState({
-                posts: response.data
+                posts: response.data.reverse()
             })
         })
     }
@@ -200,7 +201,7 @@ class App extends React.Component {
 
             <ul>
             <div className="posts">
-                {this.state.posts.reverse().map((post,index) => {
+                {this.state.posts.map((post,index) => {
                     return (
                         <li key={index}>
                             {post.username}
