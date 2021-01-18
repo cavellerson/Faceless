@@ -23,8 +23,13 @@ header {
     width: 50vw;
 }
 
+#headerContainer, #footerContainer {
+
+}
 #headerContainer {
     height: 100%;
+    top: 0;
+
 }
 
 #logo {
@@ -102,13 +107,40 @@ label, input {
 }
 
 #cancelDiv {
+<<<<<<< HEAD
+<<<<<<< HEAD:public/main.css
+    ALIGN-SELF: flex-end;
+    float: right;
+
+=======
     align-self: flex-end;
     margin: 1%;
+>>>>>>> c3b9c390b896beaff7bbb86aedef7e9fb1b84051:public/styles/main.css
+=======
+<<<<<<<< HEAD:public/styles/main.css
+    align-self: flex-end;
+    margin: 1%;
+========
+    ALIGN-SELF: flex-end;
+    float: right;
+
+>>>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce:public/main.css
+>>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce
 }
 
 #cancelButton:hover {
     color: rgb(228, 34, 34);
+<<<<<<< HEAD
+<<<<<<< HEAD:public/main.css
+=======
     cursor: pointer;
+>>>>>>> c3b9c390b896beaff7bbb86aedef7e9fb1b84051:public/styles/main.css
+=======
+<<<<<<<< HEAD:public/styles/main.css
+    cursor: pointer;
+========
+>>>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce:public/main.css
+>>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce
 }
 
 #preview {
@@ -124,6 +156,7 @@ label, input {
 #footerContainer {
     display: flex;
     justify-content: center;
+    bottom: 0;
 }
 
 footer {

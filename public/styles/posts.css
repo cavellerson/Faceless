@@ -1,8 +1,19 @@
+<<<<<<< HEAD
+html {
+    overflow-y: scroll; 
+}
+
+#postContainer {
+    display: flex;
+    justify-content: center;
+    flex-flow: nowrap;
+=======
 #postContainer {
     display: flex;
     justify-content: center;
     align-items: center;
 
+>>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce
 }
 
 #posts {
@@ -13,7 +24,10 @@
     text-align: center;
     height: 75vh;
     width: 50vw;
+<<<<<<< HEAD
+=======
     margin: 0 auto;
+>>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -23,6 +37,11 @@
     margin: 0 auto;
     margin-bottom: 2.5%;
     padding: 1%;
+<<<<<<< HEAD
+    width: 50%;
+    list-style: none;
+}
+=======
     width: 95%;
     list-style: none;
 }
@@ -83,3 +102,4 @@
     flex-direction: column;
     justify-content: center;
 }
+>>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce

@@ -109,7 +109,7 @@ class App extends React.Component {
     upvote = (event) => {
         let id = event.target.id
         axios
-            .put(`/posts/${id}`, {votes: this.state.votes + 1})
+            .put(`/posts/vote/${id}`, {votes: this.state.votes + 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -122,7 +122,7 @@ class App extends React.Component {
         let id = event.target.id
         let votes = event.target.value
         axios
-            .put(`/posts/${id}`, {votes: this.state.votes - 1})
+            .put(`/posts/vote/${id}`, {votes: this.state.votes - 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -196,7 +196,8 @@ class App extends React.Component {
                     posts: response.data.reverse(),
                     comment: ''
                 })
-            })        
+            })
+        console.log(this.state.votes);
     }
 
     // dateSort = () => {
@@ -243,7 +244,7 @@ class App extends React.Component {
                             <input
                                 type="submit"
                                 name="submit"
-                                value="Create Post"
+                                value="Post"
                                 onClick={this.showPosts} />
                         </form>
                         <div id="previewContainer">
@@ -259,9 +260,21 @@ class App extends React.Component {
             <ul id="postContainer">
             <div id="posts">
                 {this.state.posts.map((post,index) => {
+
+                    const date = new Date(post.date);
+                    let time = date.toLocaleTimeString('en-US')
+
+
+
                     return (
                         <li className="post" key={index}>
-                            <span id="author">created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
+                            <span id="author"><span className="username">{post.username}</span> @ <span className="date">{date.toDateString()} {time}
+
+
+
+                            </span></span>
+
+
                             <br/>
                             <div className="postBody">
                                 <p className="body">{post.body}</p>
@@ -273,7 +286,7 @@ class App extends React.Component {
                                 </div>:
                                 null }
                                 <br/>
-                                <div 
+                                <div
                                 className="buttonDiv"
                                 onClick={this.hideButtons}>
                                 <button
@@ -290,32 +303,34 @@ class App extends React.Component {
                                     value={post.votes}
                                     onClick={this.downvote}
                                     onMouseEnter={this.getVotes}>
-                                        ↓</button><br/>    
+                                        ↓</button><br/>
                                 </div>
                                 <div className="voteCountDiv">
                                     <span className="voteCount">votes: {post.votes}</span><br/>
                                 </div>
                             </div>
+                            <br/>
                             <div className="commentsDiv">
                                 <span id="commentsTitle">Comments: </span>
                                 {post.comments.map((comment, index) => {
                                 return (
-                                    <div className="comment" key={index}>{comment}</div>
+                                    <div className="comment" key={index}>-{comment}</div>
                                     )
                                 })}
-                                <form 
+                                <form
                                     onClick={this.comment}
                                     >
                                     <input
-                                        id="comment" 
+                                        id="comment"
                                         type="text" name="comments"
                                         // value={this.state.comment}
+                                        placeholder = "Write a comment ..."
                                         onChange={this.handleComment}
                                         />
                                     <input
-                                        id={post._id} 
+                                        id={post._id}
                                         type="submit"
-                                        value="create comment"/>    
+                                        value="create comment"/>
                                 </form>
                             </div>
                         </li>
