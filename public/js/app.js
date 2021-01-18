@@ -128,7 +128,6 @@ class App extends React.Component {
                 this.setState({
                     posts: response.data.reverse()
                 })
-                console.log(votes-1);
                 if (votes <= -3) {
                     axios.delete(`/posts/${id}`).then((response) => {
                         this.setState({
@@ -249,7 +248,7 @@ class App extends React.Component {
                         </form>
                         <div id="previewContainer">
                             {(this.state.preview === true)?
-                            <div title="Cancel" id="cancelDiv" onClick={this.cancelImage}><span><ion-icon id="cancelButton" name="close-circle-outline"></ion-icon></span></div>
+                            <div id="cancelDiv" title="Cancel" onClick={this.cancelImage}><ion-icon id="cancelButton"name="close-circle-outline"></ion-icon></div>
                             : null }
                             <img id="preview" src="" alt=""/>
                         </div>
@@ -262,50 +261,63 @@ class App extends React.Component {
                 {this.state.posts.map((post,index) => {
                     return (
                         <li className="post" key={index}>
-                            <span>created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
-                        <br/>
-                            {post.body}
-                        <br/>
-                        <img src={post.imgsrc}/>
-                        <br/>
-                        <div onClick={this.hideButtons}>
-                            <button
-                                className="vote"
-                                id={post._id}
-                                value={post.votes}
-                                onClick={this.upvote}
-                                onMouseEnter={this.getVotes}>
-                                    ↑</button>
+                            <span id="author">created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
+                            <br/>
+                            <div className="postBody">
+                                <p className="body">{post.body}</p>
+                                <br/>
 
-                            <button
-                                className="vote"
-                                id={post._id}
-                                value={post.votes}
-                                onClick={this.downvote}
-                                onMouseEnter={this.getVotes}>
-                                    ↓</button>
-                        </div>
-                        <span>votes: {post.votes}</span><br/>
-                        <span id="commentsTitle">Comments: </span>
-                        {post.comments.map((comment, index) => {
-                            return (
-                                <div className="comment" key={index}>{comment}</div>
-                                )
-                        })}
-                        <form
-                            onClick={this.comment}
-                            >
-                            <input
-                                id="comment"
-                                type="text" name="comments"
-                                // value={this.state.comment}
-                                onChange={this.handleComment}
-                                />
-                            <input
-                                id={post._id}
-                                type="submit"
-                                value="create comment"/>
-                        </form>
+                                { (post.imgsrc !== 'null')?
+                                <div className="imgDiv">
+                                    <img className="postImg" src={post.imgsrc}/>
+                                </div>:
+                                null }
+                                <br/>
+                                <div
+                                className="buttonDiv"
+                                onClick={this.hideButtons}>
+                                <button
+                                    className="vote"
+                                    id={post._id}
+                                    value={post.votes}
+                                    onClick={this.upvote}
+                                    onMouseEnter={this.getVotes}>
+                                        ↑</button>
+
+                                <button
+                                    className="vote"
+                                    id={post._id}
+                                    value={post.votes}
+                                    onClick={this.downvote}
+                                    onMouseEnter={this.getVotes}>
+                                        ↓</button><br/>
+                                </div>
+                                <div className="voteCountDiv">
+                                    <span className="voteCount">votes: {post.votes}</span><br/>
+                                </div>
+                            </div>
+                            <div className="commentsDiv">
+                                <span id="commentsTitle">Comments: </span>
+                                {post.comments.map((comment, index) => {
+                                return (
+                                    <div className="comment" key={index}>{comment}</div>
+                                    )
+                                })}
+                                <form
+                                    onClick={this.comment}
+                                    >
+                                    <input
+                                        id="comment"
+                                        type="text" name="comments"
+                                        // value={this.state.comment}
+                                        onChange={this.handleComment}
+                                        />
+                                    <input
+                                        id={post._id}
+                                        type="submit"
+                                        value="create comment"/>
+                                </form>
+                            </div>
                         </li>
                     )
                 })}
