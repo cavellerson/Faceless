@@ -1,11 +1,8 @@
-html {
-    overflow-y: scroll; 
-}
-
 #postContainer {
     display: flex;
     justify-content: center;
-    flex-flow: nowrap;
+    align-items: center;
+
 }
 
 #posts {
@@ -16,6 +13,7 @@ html {
     text-align: center;
     height: 75vh;
     width: 50vw;
+    margin: 0 auto;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -25,6 +23,57 @@ html {
     margin: 0 auto;
     margin-bottom: 2.5%;
     padding: 1%;
-    width: 50%;
+    width: 95%;
     list-style: none;
+}
+
+#author {
+    float: left;
+}
+
+.postBody {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+}
+
+.imgDiv {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    background-color: rgba(194, 194, 194, 0.5);
+}
+
+.postImg {
+    margin: 0 auto;
+    width: 60%;
+    height: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 2.5%;
+    border: 5px solid black;
+    border-radius: 5px;
+}
+
+.buttonDiv {
+    display: inline;
+    align-self: flex-start;
+    margin: 2.5%;
+}
+
+.body{
+    height: 30%;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 5%;
+    border: 1px solid black;
+}
+
+
+.commentsDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

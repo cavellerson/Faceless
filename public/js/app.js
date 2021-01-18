@@ -262,50 +262,60 @@ class App extends React.Component {
                 {this.state.posts.map((post,index) => {
                     return (
                         <li className="post" key={index}>
-                            <span>created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
-                        <br/>
-                            {post.body}
-                        <br/>
-                        <img src={post.imgsrc}/>
-                        <br/>
-                        <div onClick={this.hideButtons}>
-                            <button
-                                className="vote"
-                                id={post._id}
-                                value={post.votes}
-                                onClick={this.upvote}
-                                onMouseEnter={this.getVotes}>
-                                    ↑</button>
+                            <span id="author">created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
+                            <br/>
+                            <div className="postBody">
+                                <p className="body">{post.body}</p>
+                                <br/>
 
-                            <button
-                                className="vote"
-                                id={post._id}
-                                value={post.votes}
-                                onClick={this.downvote}
-                                onMouseEnter={this.getVotes}>
-                                    ↓</button>
-                        </div>
-                        <span>votes: {post.votes}</span><br/>
-                        <span id="commentsTitle">Comments: </span>
-                        {post.comments.map((comment, index) => {
-                            return (
-                                <div className="comment" key={index}>{comment}</div>
-                                )
-                        })}
-                        <form 
-                            onClick={this.comment}
-                            >
-                            <input
-                                id="comment" 
-                                type="text" name="comments"
-                                // value={this.state.comment}
-                                onChange={this.handleComment}
-                                />
-                            <input
-                                id={post._id} 
-                                type="submit"
-                                value="create comment"/>    
-                        </form>
+                                <div className="imgDiv">
+                                    <img className="postImg" src={post.imgsrc}/>
+                                </div>
+
+                                <br/>
+                                <div 
+                                className="buttonDiv"
+                                onClick={this.hideButtons}>
+                                <button
+                                    className="vote"
+                                    id={post._id}
+                                    value={post.votes}
+                                    onClick={this.upvote}
+                                    onMouseEnter={this.getVotes}>
+                                        ↑</button>
+
+                                <button
+                                    className="vote"
+                                    id={post._id}
+                                    value={post.votes}
+                                    onClick={this.downvote}
+                                    onMouseEnter={this.getVotes}>
+                                        ↓</button><br/>
+                                    <span>votes: {post.votes}</span><br/>    
+                                </div>
+                            </div>
+                            <div className="commentsDiv">
+                                <span id="commentsTitle">Comments: </span>
+                                {post.comments.map((comment, index) => {
+                                return (
+                                    <div className="comment" key={index}>{comment}</div>
+                                    )
+                                })}
+                                <form 
+                                    onClick={this.comment}
+                                    >
+                                    <input
+                                        id="comment" 
+                                        type="text" name="comments"
+                                        // value={this.state.comment}
+                                        onChange={this.handleComment}
+                                        />
+                                    <input
+                                        id={post._id} 
+                                        type="submit"
+                                        value="create comment"/>    
+                                </form>
+                            </div>
                         </li>
                     )
                 })}
