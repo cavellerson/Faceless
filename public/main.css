@@ -23,8 +23,13 @@ header {
     width: 50vw;
 }
 
+#headerContainer, #footerContainer {
+
+}
 #headerContainer {
     height: 100%;
+    top: 0;
+
 }
 
 #logo {
@@ -101,6 +106,16 @@ label, input {
     width: 33.333%
 }
 
+#cancelDiv {
+    ALIGN-SELF: flex-end;
+    float: right;
+
+}
+
+#cancelButton:hover {
+    color: rgb(228, 34, 34);
+}
+
 #preview {
     width: 80%;
     height: auto;
@@ -113,6 +128,7 @@ label, input {
 #footerContainer {
     display: flex;
     justify-content: center;
+    bottom: 0;
 }
 
 footer {

@@ -216,9 +216,8 @@ class App extends React.Component {
                                 onClick={this.showPreview}
                                 /><br/>
 
-                            {(this.state.preview === true)?
-                            <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
-                            : null }
+
+                            <br/>
 
                             <input
                                 type="submit"
@@ -227,6 +226,9 @@ class App extends React.Component {
                                 onClick={this.showPosts} />
                         </form>
                         <div id="previewContainer">
+                            {(this.state.preview === true)?
+                            <div title="Cancel" id="cancelDiv" onClick={this.cancelImage}><span><ion-icon id="cancelButton" name="close-circle-outline"></ion-icon></span></div>
+                            : null }
                             <img id="preview" src="" alt=""/>
                         </div>
                     </div>
