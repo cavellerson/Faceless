@@ -329,6 +329,7 @@ class App extends React.Component {
                                         placeholder = "Write a comment ..."
                                         onChange={this.handleComment}
                                         />
+                                    <br/>
                                     <input
                                         id={post._id}
                                         type="submit"
