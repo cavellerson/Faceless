@@ -259,9 +259,10 @@ class App extends React.Component {
             <ul id="postContainer">
             <div id="posts">
                 {this.state.posts.map((post,index) => {
+                    let date = new Date(post.date)
                     return (
                         <li className="post" key={index}>
-                            <span id="author">created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
+                            <span id="author"><span className="username">{post.username}</span> @ <span className="date">{date.toDateString()}</span></span>
                             <br/>
                             <div className="postBody">
                                 <p className="body">{post.body}</p>
@@ -296,11 +297,12 @@ class App extends React.Component {
                                     <span className="voteCount">votes: {post.votes}</span><br/>
                                 </div>
                             </div>
+                            <br/>
                             <div className="commentsDiv">
                                 <span id="commentsTitle">Comments: </span>
                                 {post.comments.map((comment, index) => {
                                 return (
-                                    <div className="comment" key={index}>{comment}</div>
+                                    <div className="comment" key={index}>-{comment}</div>
                                     )
                                 })}
                                 <form
