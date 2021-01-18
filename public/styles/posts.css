@@ -58,10 +58,15 @@
 }
 
 .buttonDiv {
-    display: inline;
     align-self: flex-start;
-    margin: 2.5%;
+    margin-left: 2.5%;
 }
+
+.voteCountDiv {
+    align-self: flex-start;
+    margin-left: 2.5%;
+}
+
 
 .body{
     height: 30%;
@@ -70,6 +75,7 @@
     margin-top: 5%;
     border: 1px solid black;
 }
+
 
 
 .commentsDiv {
