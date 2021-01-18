@@ -6,12 +6,7 @@ html {
     display: flex;
     justify-content: center;
     flex-flow: nowrap;
-=======
-#postContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    overflow: hidden;
 }
 
 #posts {
@@ -32,13 +27,10 @@ html {
     margin: 0 auto;
     margin-bottom: 2.5%;
     padding: 1%;
-<<<<<<< HEAD
     width: 50%;
     list-style: none;
 }
-    width: 95%;
-    list-style: none;
-}
+
 
 #author {
     float: left;
@@ -78,6 +70,11 @@ html {
 .voteCountDiv {
     align-self: flex-start;
     margin-left: 2.5%;
+}
+
+.vote:hover {
+    color: rgb(228, 34, 34);
+    cursor: pointer;
 }
 
 

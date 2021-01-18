@@ -289,21 +289,23 @@ class App extends React.Component {
                                 <div
                                 className="buttonDiv"
                                 onClick={this.hideButtons}>
-                                <button
-                                    className="vote"
+                                <ion-icon
+                                    name="happy-outline"
+                                    class="vote"
                                     id={post._id}
                                     value={post.votes}
                                     onClick={this.upvote}
                                     onMouseEnter={this.getVotes}>
-                                        ↑</button>
+                                        ↑</ion-icon>
 
-                                <button
-                                    className="vote"
+                                <ion-icon
+                                    name="heart-dislike-circle-outline"
+                                    class="vote"
                                     id={post._id}
                                     value={post.votes}
                                     onClick={this.downvote}
                                     onMouseEnter={this.getVotes}>
-                                        ↓</button><br/>
+                                        ↓</ion-icon><br/>
                                 </div>
                                 <div className="voteCountDiv">
                                     <span className="voteCount">votes: {post.votes}</span><br/>
