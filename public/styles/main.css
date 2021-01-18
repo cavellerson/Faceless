@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+*{
+    color: blueviolet;
+    font-family: 'Raleway', sans-serif;;
+}
+/* HEADER */
+#headerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title {
+    text-align: center;
+    color: white;
+}
+
+header {
+    height: 12.5vh;
+    background-color: blueviolet;
+    border-radius: 2.5px;
+    width: 50vw;
+}
+
+#headerContainer, #footerContainer {
+
+}
+#headerContainer {
+    height: 100%;
+    top: 0;
+
+}
+
+#logo {
+    height: 10vh;
+}
+
+
+/* Create Post */
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 1px solid magenta; */
+    margin-top: 1%;
+}
+
+#createPostBackground {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    /* margin-top: 2.5%; */
+    padding: 2.5%;
+    background-color: rgba(194, 194, 194, 0.5);
+    border-radius: 5px;
+    /* border: 1px solid yellow; */
+    width: fit-content;
+}
+
+#createPostContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* border: 1px solid black; */
+    width: fit-content;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#submitTitle {
+    text-align: center;
+}
+
+#body {
+    background-image: url('./imgs/pngegggray.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    color: rgb(228, 34, 34);
+    font-weight: 900;
+    font-size: .85em;
+    margin: 5%;
+    height: 15vh;
+}
+
+label, input {
+    margin: 5%;
+}
+
+/* Image Preview */
+#previewContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+    margin-bottom: 2.5%;
+    background-color: rgba(194, 194, 194, 0.5);
+    border-radius: 5px;
+    /* border: 1px solid yellow; */
+    width: 33.333%
+}
+
+#cancelDiv {
+<<<<<<< HEAD:public/main.css
+    ALIGN-SELF: flex-end;
+    float: right;
+
+=======
+    align-self: flex-end;
+    margin: 1%;
+>>>>>>> c3b9c390b896beaff7bbb86aedef7e9fb1b84051:public/styles/main.css
+}
+
+#cancelButton:hover {
+    color: rgb(228, 34, 34);
+<<<<<<< HEAD:public/main.css
+=======
+    cursor: pointer;
+>>>>>>> c3b9c390b896beaff7bbb86aedef7e9fb1b84051:public/styles/main.css
+}
+
+#preview {
+    width: 80%;
+    height: auto;
+    /* border: 1px solid magenta; */
+    margin: 2.5%;
+    margin-bottom: 5%;
+}
+
+
+/* Footer */
+#footerContainer {
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: blueviolet;
+    border-radius: 2.5px;
+    height: 5vh;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    margin: 1%;
+    width: 50vw;
+    /* background-color: #333; */
+    overflow: hidden;
+    /* border: 1px solid red; */
+}
+
+.nav > a {
+    color: white;
+    text-decoration: none;
+    transition: 0.6s;
+    align-self: center;
+}
+
+#about {
+    margin-right: 10%;
+}
+
+#developer {
+    margin-left: 10%;
+}
+
+.nav a:hover {
+    border-bottom:7px solid  #333;
+}
+
+@media screen and (max-width: 1024px) {
+    header {
+        height: 10vh;
+        width: 100vw;
+        /* margin-bottom: 2.5%; */
+    }
+
+    #main {
+        margin-top: 2.5%;
+    }
+
+    .nav {
+        width: 98vw;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #main {
+        margin-top: 3%;
+    }
+
+    #createPostBackground {
+        width: 100%;
+        padding: 0;
+    }
+
+    #createPostContainer {
+        width: 100%;
+        height: 75vh;
+    }
+
+    #preview {
+        width: 75%;
+    }
+
+    .nav {
+        width: 98vw;
+    }
+}
