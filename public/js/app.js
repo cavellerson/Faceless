@@ -30,7 +30,8 @@ class App extends React.Component {
         body: "",
         posts: [],
         votes: 0,
-        preview: false
+        preview: false,
+        comment: ""
     }
 
     rngUsername = () => {
@@ -39,10 +40,16 @@ class App extends React.Component {
             username: `${randomAdjective(adjectives)} ${pokemon}`
         })
     }
-
+    posts
     handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
+        })
+    }
+
+    handleComment = (event) => {
+        this.setState({
+            comment: event.target.value
         })
     }
 
@@ -89,8 +96,9 @@ class App extends React.Component {
     }
 
     getVotes = (event) => {
+        let id = event.target.id
         axios
-            .get('/posts/' + event.target.id)
+            .get(`/posts/${id}`)
             .then((response) => {
                 console.log(response.data.votes)
                 this.setState({
@@ -101,7 +109,7 @@ class App extends React.Component {
     upvote = (event) => {
         let id = event.target.id
         axios
-            .put('/posts/' + id, {votes: this.state.votes + 1})
+            .put(`/posts/${id}`, {votes: this.state.votes + 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -114,7 +122,7 @@ class App extends React.Component {
         let id = event.target.id
         let votes = event.target.value
         axios
-            .put('/posts/' + id, {votes: this.state.votes - 1})
+            .put(`/posts/${id}`, {votes: this.state.votes - 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -131,12 +139,7 @@ class App extends React.Component {
                 }
 
             })
-
-
-
     }
-
-
 
     create = (event) => {
         event.preventDefault();
@@ -168,7 +171,7 @@ class App extends React.Component {
 
     showPosts = () => {
         this.hideForm();
-        document.querySelector('.posts').style.display = 'block'
+        document.querySelector('#posts').style.display = 'block'
 
     }
 
@@ -180,9 +183,31 @@ class App extends React.Component {
         })
     }
 
+    comment = (event) => {
+        event.preventDefault();
+        document.querySelector('#comment').value = ''
+        let id = event.target.id
+        console.log(id);
+        axios
+            .put(
+                `/posts/${id}`,
+                {comments: [this.state.comment]})
+            .then((response) => {
+                this.setState({
+                    posts: response.data.reverse(),
+                    comment: ''
+                })
+            })        
+    }
+
+    // dateSort = () => {
+    //     console.log(this.state.posts[0].date)
+    // }
+
     render = ()=>{
         return(
             <div>
+                {/* <button onClick={this.dateSort}>Date Sort</button> */}
                 <div id="main">
                 <div id="createPostBackground">
                     <div id="createPostContainer">
@@ -216,10 +241,6 @@ class App extends React.Component {
                                 onClick={this.showPreview}
                                 /><br/>
 
-                            {(this.state.preview === true)?
-                            <button title="Cancel" onClick={this.cancelImage}><span>cancel</span></button>
-                            : null }
-
                             <input
                                 type="submit"
                                 name="submit"
@@ -227,18 +248,21 @@ class App extends React.Component {
                                 onClick={this.showPosts} />
                         </form>
                         <div id="previewContainer">
+                            {(this.state.preview === true)?
+                            <div id="cancelDiv" title="Cancel" onClick={this.cancelImage}><ion-icon id="cancelButton"name="close-circle-outline"></ion-icon></div>
+                            : null }
                             <img id="preview" src="" alt=""/>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <ul>
-            <div className="posts">
+            <ul id="postContainer">
+            <div id="posts">
                 {this.state.posts.map((post,index) => {
                     return (
-                        <li key={index}>
-                            {post.username}
+                        <li className="post" key={index}>
+                            <span>created by: <span className="username">{post.username}</span> at <span className="date">{post.date}</span></span>
                         <br/>
                             {post.body}
                         <br/>
@@ -261,7 +285,27 @@ class App extends React.Component {
                                 onMouseEnter={this.getVotes}>
                                     ↓</button>
                         </div>
-                        <span>votes: {post.votes}</span>
+                        <span>votes: {post.votes}</span><br/>
+                        <span id="commentsTitle">Comments: </span>
+                        {post.comments.map((comment, index) => {
+                            return (
+                                <div className="comment" key={index}>{comment}</div>
+                                )
+                        })}
+                        <form 
+                            onClick={this.comment}
+                            >
+                            <input
+                                id="comment" 
+                                type="text" name="comments"
+                                // value={this.state.comment}
+                                onChange={this.handleComment}
+                                />
+                            <input
+                                id={post._id} 
+                                type="submit"
+                                value="create comment"/>    
+                        </form>
                         </li>
                     )
                 })}
@@ -279,5 +323,5 @@ ReactDOM.render(
     document.querySelector('#root')
 )
 
-document.querySelector('.posts').style.display = 'none'
+document.querySelector('#posts').style.display = 'none'
 document.querySelector('#preview').style.display = 'none'
