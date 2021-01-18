@@ -267,10 +267,11 @@ class App extends React.Component {
                                 <p className="body">{post.body}</p>
                                 <br/>
 
+                                { (post.imgsrc !== 'null')?
                                 <div className="imgDiv">
                                     <img className="postImg" src={post.imgsrc}/>
-                                </div>
-
+                                </div>:
+                                null }
                                 <br/>
                                 <div 
                                 className="buttonDiv"
