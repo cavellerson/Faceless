@@ -128,7 +128,6 @@ class App extends React.Component {
                 this.setState({
                     posts: response.data.reverse()
                 })
-                console.log(votes-1);
                 if (votes <= -3) {
                     axios.delete(`/posts/${id}`).then((response) => {
                         this.setState({
@@ -290,8 +289,10 @@ class App extends React.Component {
                                     value={post.votes}
                                     onClick={this.downvote}
                                     onMouseEnter={this.getVotes}>
-                                        ↓</button><br/>
-                                    <span>votes: {post.votes}</span><br/>    
+                                        ↓</button><br/>    
+                                </div>
+                                <div className="voteCountDiv">
+                                    <span className="voteCount">votes: {post.votes}</span><br/>
                                 </div>
                             </div>
                             <div className="commentsDiv">
