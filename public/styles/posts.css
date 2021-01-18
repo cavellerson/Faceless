@@ -16,7 +16,7 @@ html {
     align-items: center;
     text-align: center;
     height: 75vh;
-    width: 50vw;
+    width: fit-content;
     margin: 0 auto;
     overflow-y: auto;
     overflow-x: hidden;
