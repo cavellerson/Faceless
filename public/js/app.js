@@ -109,7 +109,7 @@ class App extends React.Component {
     upvote = (event) => {
         let id = event.target.id
         axios
-            .put(`/posts/${id}`, {votes: this.state.votes + 1})
+            .put(`/posts/vote/${id}`, {votes: this.state.votes + 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -122,7 +122,7 @@ class App extends React.Component {
         let id = event.target.id
         let votes = event.target.value
         axios
-            .put(`/posts/${id}`, {votes: this.state.votes - 1})
+            .put(`/posts/vote/${id}`, {votes: this.state.votes - 1})
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -197,6 +197,7 @@ class App extends React.Component {
                     comment: ''
                 })
             })
+        console.log(this.state.votes);
     }
 
     // dateSort = () => {
@@ -243,7 +244,7 @@ class App extends React.Component {
                             <input
                                 type="submit"
                                 name="submit"
-                                value="Create Post"
+                                value="Post"
                                 onClick={this.showPosts} />
                         </form>
                         <div id="previewContainer">
@@ -259,10 +260,21 @@ class App extends React.Component {
             <ul id="postContainer">
             <div id="posts">
                 {this.state.posts.map((post,index) => {
-                    let date = new Date(post.date)
+
+                    const date = new Date(post.date);
+                    let time = date.toLocaleTimeString('en-US')
+
+
+
                     return (
                         <li className="post" key={index}>
-                            <span id="author"><span className="username">{post.username}</span> @ <span className="date">{date.toDateString()}</span></span>
+                            <span id="author"><span className="username">{post.username}</span> @ <span className="date">{date.toDateString()} {time}
+
+
+
+                            </span></span>
+
+
                             <br/>
                             <div className="postBody">
                                 <p className="body">{post.body}</p>
@@ -312,6 +324,7 @@ class App extends React.Component {
                                         id="comment"
                                         type="text" name="comments"
                                         // value={this.state.comment}
+                                        placeholder = "Write a comment ..."
                                         onChange={this.handleComment}
                                         />
                                     <input
