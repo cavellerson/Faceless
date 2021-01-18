@@ -1,3 +1,13 @@
+html {
+    overflow-y: scroll; 
+}
+
+#postContainer {
+    display: flex;
+    justify-content: center;
+    flex-flow: nowrap;
+}
+
 #posts {
     display: flex;
     justify-content: center;
@@ -5,10 +15,9 @@
     align-items: center;
     text-align: center;
     height: 75vh;
-    overflow: scroll;
+    width: 50vw;
+    overflow-y: auto;
     overflow-x: hidden;
-    /* border: 2px solid green; */
-    padding: 2.5%;
 }
 
 .post {
