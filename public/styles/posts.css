@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 html {
-    overflow-y: scroll; 
+    overflow-y: scroll;
 }
 
 #postContainer {
@@ -13,7 +12,6 @@ html {
     justify-content: center;
     align-items: center;
 
->>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce
 }
 
 #posts {
@@ -24,10 +22,7 @@ html {
     text-align: center;
     height: 75vh;
     width: 50vw;
-<<<<<<< HEAD
-=======
     margin: 0 auto;
->>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -41,7 +36,6 @@ html {
     width: 50%;
     list-style: none;
 }
-=======
     width: 95%;
     list-style: none;
 }
@@ -102,4 +96,3 @@ html {
     flex-direction: column;
     justify-content: center;
 }
->>>>>>> 1b5c23c2e847852c1568c2a795232494b08360ce
