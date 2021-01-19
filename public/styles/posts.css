@@ -1,0 +1,142 @@
+#postContainer {
+    display: flex;
+    justify-content: center;
+    flex-flow: nowrap;
+    overflow: hidden;
+}
+
+#posts {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    height: 75vh;
+    width: fit-content;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.post {
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-bottom: 2.5%;
+    padding: 1%;
+    width: 40vw;
+    list-style: none;
+}
+
+
+#author {
+    float: left;
+}
+
+.postBody {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+}
+
+.imgDiv {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    background-color: rgba(194, 194, 194, 0.5);
+}
+
+.postImg {
+    margin: 0 auto;
+    width: 60%;
+    height: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 2.5%;
+    border: 5px solid black;
+    border-radius: 5px;
+}
+
+.buttonDiv {
+    align-self: flex-start;
+    margin-left: 2.5%;
+}
+
+.voteCountDiv {
+    align-self: flex-start;
+    margin-left: 2.5%;
+
+}
+
+.vote {
+    background-color: white;
+    border: none;
+    font-size: 1.5em;
+    transition: 0.7s
+}
+
+.vote:hover {
+    color: rgb(228, 34, 34);
+    cursor: pointer;
+    font-size: 2em;
+}
+
+
+.body{
+    height: 30%;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 5%;
+    color: #333;
+}
+
+
+
+.commentsDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-wrap: break-word;
+}
+
+.commentButton, .postButton {
+    padding: 1%;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.commentButton:hover, .postButton:hover{
+    background-color: white;
+    color: #333;
+}
+
+@media screen and (max-width: 1024px) {
+    .post {
+        margin: 0 auto;
+        width: 90%;
+        margin-top: 1.25%;
+        margin-bottom: 1.25%;
+    }
+
+    #posts {
+        width: 95%;
+    }
+
+    .postBody {
+        width: 100%;
+    }
+    #postContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+    }
+}
