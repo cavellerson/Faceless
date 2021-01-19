@@ -322,7 +322,8 @@ class App extends React.Component {
                                 <form
                                     onClick={this.comment}
                                     >
-                                    <input
+                                    <textarea
+                                        rows="3"
                                         id="comment"
                                         type="text" name="comments"
                                         // value={this.state.comment}
