@@ -9,4 +9,16 @@ B) Make users contribute to gain access to the message board and thus creating a
 C) Users are given a randomly generated username in order to stay anonymous and still be able spill their deepest darkest SECRETS.
 D) This app was built using a MERN stack (Mongo, Express, React, Node.js)
 
-There's plenty of room for development, using different components for each of the functions within the app. We can most definitely improve on its aesthetics and sorting functions to sort the posts. In the future, we'd like to also implement some type of community/location based post visability as well as dates/times for comments and randomly generated usernames for comments. 
+
+Key Features:
+Randomly Generated Usernames
+Users can only vote once on each post (until refresh)
+Users can only access the message board after a post
+
+FUTURE:
+
+There's plenty of room for development, using different components for each of the functions within the app. We can most definitely improve on its aesthetics and sorting functions to sort the posts. In the future, we'd like to also implement some type of community/location based post visability as well as dates/times for comments and randomly generated usernames for comments.
+
+When we get 100,000 posts per DAY, we will implement a feature that will render x more posts upon clicking see more
+
+-Cavell W and Ryan F
