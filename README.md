@@ -20,5 +20,7 @@ There's plenty of room for development, using different components for each of t
 
 When we get 100,000 posts per DAY, we will implement a feature that will render x more posts upon clicking see more
 
+Be able to link pictures online(easy work we'll do this quickly)
+
 -Cavell W and Ryan F
 
