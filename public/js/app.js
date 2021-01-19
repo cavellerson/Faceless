@@ -245,6 +245,7 @@ class App extends React.Component {
                                 type="submit"
                                 name="submit"
                                 value="Post"
+                                className= "postButton"
                                 onClick={this.showPosts} />
                         </form>
                         <div id="previewContainer">
@@ -332,6 +333,7 @@ class App extends React.Component {
                                         />
                                     <br/>
                                     <input
+                                        className="commentButton"
                                         id={post._id}
                                         type="submit"
                                         value="create comment"/>
