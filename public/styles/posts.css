@@ -68,11 +68,20 @@
 .voteCountDiv {
     align-self: flex-start;
     margin-left: 2.5%;
+
+}
+
+.vote {
+    background-color: white;
+    border: none;
+    font-size: 1.5em;
+    transition: 0.7s
 }
 
 .vote:hover {
     color: rgb(228, 34, 34);
     cursor: pointer;
+    font-size: 2em;
 }
 
 

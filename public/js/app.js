@@ -1,3 +1,5 @@
+
+
 // logs all adjectives in adjectives.js
 // console.log(adjectives);
 
@@ -73,7 +75,7 @@ class App extends React.Component {
             file: event.target.files[0],
             preview: true
         })
-        console.log(event.target.files[0])
+        // console.log(event.target.files[0])
         this.previewFile()
     }
 
@@ -100,7 +102,7 @@ class App extends React.Component {
         axios
             .get(`/posts/${id}`)
             .then((response) => {
-                console.log(response.data.votes)
+                // console.log(response.data.votes)
                 this.setState({
                     votes: response.data.votes
                 })
@@ -111,7 +113,7 @@ class App extends React.Component {
         axios
             .put(`/posts/vote/${id}`, {votes: this.state.votes + 1})
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 this.setState({
                     posts: response.data.reverse()
                 })
@@ -124,16 +126,18 @@ class App extends React.Component {
         axios
             .put(`/posts/vote/${id}`, {votes: this.state.votes - 1})
             .then((response) => {
-                console.log(response)
+                // console.log("VOTE has gone down by 1")
+                // console.log(votes);
                 this.setState({
                     posts: response.data.reverse()
                 })
                 if (votes <= -3) {
+                    // console.log("votes is -3");
                     axios.delete(`/posts/${id}`).then((response) => {
                         this.setState({
                             posts: response.data.reverse()
                         })
-                        console.log(response + "has been deleted");
+                        // console.log(response + "has been deleted");
                     })
                 }
 
@@ -142,13 +146,13 @@ class App extends React.Component {
 
     create = (event) => {
         event.preventDefault();
-        console.log(this.state.file)
+        // console.log(this.state.file)
         let file = this.state.file
         let formData = new FormData();
         formData.append('imgsrc', file)
         formData.append('username', this.state.username)
         formData.append('body', this.state.body)
-        console.log(formData)
+        // console.log(formData)
         axios
             .post('/posts', formData, {
                 headers: {
@@ -157,7 +161,7 @@ class App extends React.Component {
             })
             .then(
                 (response) => {
-                    console.log(response)
+                    // console.log(response)
                     this.componentDidMount()
                 }
             )
@@ -186,7 +190,7 @@ class App extends React.Component {
         event.preventDefault();
         document.querySelector('#comment').value = ''
         let id = event.target.id
-        console.log(id);
+        // console.log(id);
         axios
             .put(
                 `/posts/${id}`,
@@ -197,7 +201,7 @@ class App extends React.Component {
                     comment: ''
                 })
             })
-        console.log(this.state.votes);
+        // console.log(this.state.votes);
     }
 
     // dateSort = () => {
@@ -290,23 +294,23 @@ class App extends React.Component {
                                 <div
                                 className="buttonDiv"
                                 onClick={this.hideButtons}>
-                                <ion-icon
-                                    name="happy-outline"
-                                    class="vote"
-                                    id={post._id}
-                                    value={post.votes}
-                                    onClick={this.upvote}
-                                    onMouseEnter={this.getVotes}>
-                                        ↑</ion-icon>
 
-                                <ion-icon
-                                    name="heart-dislike-circle-outline"
-                                    class="vote"
-                                    id={post._id}
-                                    value={post.votes}
-                                    onClick={this.downvote}
-                                    onMouseEnter={this.getVotes}>
-                                        ↓</ion-icon><br/>
+                                    <button class="vote"
+                                            id={post._id}
+                                            value={post.votes}
+                                            onClick={this.upvote}
+                                            onMouseEnter={this.getVotes}>
+                                            ☺
+                                    </button>
+
+                                    <button class="vote"
+                                            id={post._id}
+                                            value={post.votes}
+                                            onClick={this.downvote}
+                                            onMouseEnter={this.getVotes}> ☹
+                                    </button>
+
+
                                 </div>
                                 <div className="voteCountDiv">
                                     <span className="voteCount">votes: {post.votes}</span><br/>
