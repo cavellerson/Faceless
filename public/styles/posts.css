@@ -20,7 +20,7 @@
 
 .post {
     box-sizing: border-box;
-    border: 5px solid black;
+    border: 1px solid black;
     border-radius: 5px;
     margin: 0 auto;
     margin-bottom: 2.5%;
@@ -81,7 +81,6 @@
     width: 95%;
     margin: 0 auto;
     margin-top: 5%;
-    border: 1px solid black;
     color: #333;
 }
 
@@ -92,6 +91,19 @@
     flex-direction: column;
     justify-content: center;
     overflow-wrap: break-word;
+}
+
+.commentButton, .postButton {
+    padding: 1%;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.commentButton:hover, .postButton:hover{
+    background-color: white;
+    color: #333;
 }
 
 @media screen and (max-width: 1024px) {
