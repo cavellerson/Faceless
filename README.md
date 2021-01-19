@@ -38,5 +38,7 @@ button for dark mode
 
 click on the face in order to get new posts that allows you to see new posts/vote
 
+currently, users can just go to the site and input whatever votes/username they want by submitting requests to the server side... so they can essentially bypass the client side code.. we'll find a way to fix that!
+
 -Cavell W and Ryan F
 
