@@ -11,6 +11,12 @@
     align-items: center;
 }
 
+#imgsrc {
+    border: none;
+    margin: auto;
+    width: 65%;
+}
+
 #title {
     text-align: center;
     color: white;
@@ -115,6 +121,9 @@ label, input {
 #cancelButton:hover {
     color: rgb(228, 34, 34);
     cursor: pointer;
+    transition: .7s;
+    font-size: 2em;
+
 }
 
 #preview {
