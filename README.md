@@ -50,6 +50,7 @@ a friend posted this:
 formData = new FormData();
 formData.append('username', 'ez');
 formData.append('body', 'like this');
+formData.append('votes', 1234456);
 axios.post('/posts', formData, {headers: {'Content-Type': 'form-data'}}); will need to fix!
 
 -Cavell W and Ryan F
