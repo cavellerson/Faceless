@@ -16,13 +16,27 @@ Users can only access the message board after a post
 
 FUTURE:
 
-There's plenty of room for development, using different components for each of the functions within the app. We can most definitely improve on its aesthetics and sorting functions to sort the posts. In the future, we'd like to also implement some type of community/location based post visability as well as dates/times for comments and randomly generated usernames for comments.
+There's plenty of room for development, 
+
+Use different components for each of the functions within the app
+
+We can most definitely improve on its aesthetics and sorting functions to sort the posts
+
+In the future, we'd like to also implement some type of community/location based post visability as well as dates/times for comments and randomly generated usernames for comments
 
 When we get 100,000 posts per DAY, we will implement a feature that will render x more posts upon clicking see more
 
 Be able to link pictures online(easy work we'll do this quickly)
 
 Users cannot vote on a post that is just uploaded... we need to implement a live refresh
+
+Format the comment section so it is easier on the eyes
+
+change position of vote buttons
+
+button for dark mode
+
+click on the face in order to get new posts that allows you to see new posts/vote
 
 -Cavell W and Ryan F
 
