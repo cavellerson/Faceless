@@ -38,7 +38,13 @@ button for dark mode
 
 click on the face in order to get new posts that allows you to see new posts/vote
 
-currently, users can just go to the site and input whatever votes/username they want by submitting requests to the server side... so they can essentially bypass the client side code.. we'll find a way to fix that!
+currently, users can just go to the site and do fake requests and input whatever votes/username they want by submitting requests to the server side... so they can essentially bypass the client side code.. we'll find a way to fix that!
+a friend posted this: 
+
+formData = new FormData();
+formData.append('username', 'ez');
+formData.append('body', 'like this');
+axios.post('/posts', formData, {headers: {'Content-Type': 'form-data'}}); will need to fix!
 
 -Cavell W and Ryan F
 
