@@ -22,5 +22,7 @@ When we get 100,000 posts per DAY, we will implement a feature that will render 
 
 Be able to link pictures online(easy work we'll do this quickly)
 
+Users cannot vote on a post that is just uploaded... we need to implement a live refresh
+
 -Cavell W and Ryan F
 
